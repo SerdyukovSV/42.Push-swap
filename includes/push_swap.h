@@ -11,10 +11,10 @@
 /*
 ** Error message
 */
-# define NOARG          (1)
-# define EOVERFLOW      (2)
-# define DUBLICATE      (3)
-# define ARGNOINT       (4)
+# define NOARG          (1 << 0)
+# define EOVERFLOW      (1 << 1)
+# define DUBLICATE      (1 << 2)
+# define ARGNOINT       (1 << 3)
 
 typedef struct      s_lst
 {
@@ -26,6 +26,8 @@ typedef struct      s_lst
 typedef struct      s_stack
 {
     char            *prg;
+    t_lst           *head;
+    t_lst           *tail;
     t_lst           stack[2];
 }                   t_stack;
 
