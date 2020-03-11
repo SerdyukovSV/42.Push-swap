@@ -3,6 +3,8 @@
 
 # include "../libft/libft.h"
 
+# include <stdio.h>
+
 # define STACK_A        (0)
 # define STACK_B        (1)
 
@@ -11,7 +13,7 @@
 */
 # define NOARG          (1)
 # define EOVERFLOW      (2)
-# define DUBL           (3)
+# define DUBLICATE      (3)
 # define ARGNOINT       (4)
 
 typedef struct      s_lst
