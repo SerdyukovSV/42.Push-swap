@@ -1,21 +1,41 @@
 #include "../includes/push_swap.h"
 
-t_lst *ft_creat_elem(int data)
+void    *ft_push_front(t_linkedlist *list, int data)
 {
-    t_lst *new;
+    t_node *tmp;
 
-    if (new = (t_lst*)malloc(sizeof(t_lst)))
+    if (tmp = (t_node*)malloc(sizeof(t_node)))
         return (NULL);
-    new->data = data;
-    new->next = NULL;
-    new->prev = NULL;
-    return (new);
+    tmp->data = data;
+    tmp->next = list->head;
+    tmp->prev = NULL;
+    if (list->head)
+        list->head->prev = tmp;
+    list->head = tmp;
+    if (!list->tail)
+        list->tail = tmp;
+    list->size += 1;
+    return (tmp);
 }
 
-// t_lst ft_lst_push_front()
+t_linkedlist *creat_linkedlist()
+{
+    t_linkedlist *tmp;
+
+    tmp->size = 0;
+    tmp->head = tmp->tail = NULL;
+
+    return (tmp);
+}
+
+
 
 int creat_stack(t_stack *stack, char **str)
 {
+    t_linkedlist *tmp;
+
+    tmp = creat_linkedlist();
+    ft_push_front(tmp, 42);
 }
 
 int init_stack(t_stack *stack, char *arg)
