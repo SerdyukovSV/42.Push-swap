@@ -4,7 +4,7 @@ void    *ft_push_front(t_linkedlist *list, int data)
 {
     t_node *tmp;
 
-    if (tmp = (t_node*)malloc(sizeof(t_node)))
+    if (!(tmp = (t_node*)malloc(sizeof(t_node))))
         return (NULL);
     tmp->data = data;
     tmp->next = list->head;
@@ -30,12 +30,13 @@ t_linkedlist *creat_linkedlist()
 
 
 
-int creat_stack(t_stack *stack, char **str)
+t_linkedlist *creat_stack(char **str)
 {
     t_linkedlist *tmp;
 
     tmp = creat_linkedlist();
     ft_push_front(tmp, 42);
+    return (tmp);
 }
 
 int init_stack(t_stack *stack, char *arg)
@@ -48,6 +49,7 @@ int init_stack(t_stack *stack, char *arg)
         return (NOARG);
     if ((ret = check_stack(str)))
         return (ret);
+    stack->stack[STACK_A] = creat_stack(str);
     
     return (0);
 }

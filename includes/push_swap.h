@@ -33,12 +33,11 @@ typedef struct  s_linkedlist
 typedef struct      s_stack
 {
     char            *prg;
-    // t_node           *head;
-    // t_node           *tail;
-    t_node           stack[2];
+    t_linkedlist    *stack[2];
 }                   t_stack;
 
 
 int init_stack(t_stack *stack, char *arg);
+int check_stack(char **str);
 
 #endif
