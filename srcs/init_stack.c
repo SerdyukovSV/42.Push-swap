@@ -49,7 +49,8 @@ int init_stack(t_stack *stack, char *arg)
         return (NOARG);
     if ((ret = check_stack(str)))
         return (ret);
-    stack->stack[STACK_A] = creat_stack(str);
+    // stack->stack[STACK_A] = creat_stack(str);
+    printf("lalalala\n");
     
     return (0);
 }
