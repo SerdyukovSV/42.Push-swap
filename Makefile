@@ -6,7 +6,7 @@
 #    By: gartanis <gartanis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 18:06:29 by gartanis          #+#    #+#              #
-#    Updated: 2020/03/14 19:00:11 by gartanis         ###   ########.fr        #
+#    Updated: 2020/03/15 17:39:20 by gartanis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,43 +14,38 @@ TARGETA	:= push_swap
 TARGETB := checker
 CFLAGS 	:= -Wall -Werror -Wextra
 CC 		:= gcc
-LIBFT	:= libft/ft_atoi.c libft/ft_isdigit.c libft/ft_strcmp.c libft/ft_strlen.c libft/ft_strsplit.c
-SRC 	:= srcs/*.c
-OBJ 	:= $(notdir $(SRCF:.c=.o) $(LIBFT:.c=.o))
-OBJF 	:= *.o
-INC		:= -I includes/push_swap.h libft/libft.h
+LIBF	:= libft/ft_atoi.c libft/ft_isdigit.c libft/ft_strcmp.c libft/ft_strlen.c libft/ft_strsplit.c
+SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/push_swap.c
+OBJF 	:= $(addprefix obj/, $(notdir $(SRCF:.c=.o) $(LIBF:.c=.o)))
+INC		:= includes/push_swap.h
+OBJDIR	:= obj
 
 # VPATH := includes srcs
 # VAR := $(NAME) checker
 # VAR := $(addprefix xyu_, $(VAR))
 # VAR := $(addsuffix _pizda, $(VAR))
-# SEARCH_WILDCARDS := includes/*.h srcs/*.c
-# SRC_FILES := $(wildcard $(SEARCH_WILDCARDS))
-# SRC_FILES := $(notdir $(SRC_FILES))
-# OBJ_FILES := $(SRC_FILES:.c=.o)
 
-# SRCH := srcs/*.c includes/*.h
-# SRCS := $(wildcard $(SRCH))
-# SRCS := $(notdir $(SRCS))
 
 all: $(TARGETA)
 
 $(TARGETA): $(OBJF)
 	@$(CC) $^ -o $@
-	@mkdir obj && mv *.o obj/
-	@echo "Compiling $(TARGETA): \033[32mSUCCESS\033[00m"
+	@echo "[$(TARGETA)] \033[32mcompiling completed\033[00m"
 
-$(OBJF): $(SRC) $(LIBFT)
-	@printf "[.:]\r"
-	@$(CC) -c $(INC) $^
-	@printf "[:.]\r"
+$(OBJF): $(SRCF) $(LIBF) $(INC)
+	@printf " Compiling [.:]\r"
+	@$(CC) -c -I $(INC) $^
+	@mkdir -p obj && mv *.o obj/
+	@printf " Compiling [:.]\r"
 
 clean:
 	@rm -rf *.o obj
-	@echo "$(TARGETA): removed object files \033[32mOK\033[00m"
+	@echo "[$(TARGETA)] \033[33mremoved object files\033[00m"
 
 fclean: clean
 	@rm $(TARGETA)
-	@echo "$(TARGETA): removed \033[32mOK\033[00m"
+	@echo "[$(TARGETA)] \033[33mremoved program\033[00m"
 
 re: fclean all
+
+.PHONY: clean fclean re all

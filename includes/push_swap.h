@@ -5,6 +5,8 @@
 
 # include <stdio.h>
 
+# define ERR_M "\033[31;1merror:\033[00m"
+
 # define STACK_A        (0)
 # define STACK_B        (1)
 
