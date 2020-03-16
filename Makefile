@@ -6,7 +6,7 @@
 #    By: gartanis <gartanis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 18:06:29 by gartanis          #+#    #+#              #
-#    Updated: 2020/03/16 19:25:02 by gartanis         ###   ########.fr        #
+#    Updated: 2020/03/16 19:28:09 by gartanis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(OBJF): $(SRCF) $(LIBF) $(INC)
 	@printf " Compiling [:.]\r"
 
 clean:
-	@rm -rf *.o obj
+	@rm -rf *.o obj includes/push_swap.h.gch
 	@echo "\033[39;1m[$(TARGETA)]\033[00m \033[33;1mremoved object files\033[00m"
 
 fclean: clean
