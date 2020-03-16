@@ -3,13 +3,13 @@
 int print_error(t_stack stack, int errcode)
 {
     if (errcode & NOARG)
-        printf("%s: %s %s\n", stack.prg, ERR_M, "missing arguments");
+        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, NOARG_MS);
     if (errcode & EOVERFLOW)
-        printf("%s: %s %s\n", stack.prg, ERR_M, "value too large to be stored in data type");
+        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, EOVERFLOW_MS);
     if (errcode & DUBLICATE)
-        printf("%s: %s %s\n", stack.prg, ERR_M, "there are duplicates");
+        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, DUBLICATE_MS);
     if (errcode & ARGNOINT)
-        printf("%s: %s %s\n", stack.prg, ERR_M, "argument are not integer");
+        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, ARGNOINT_MS);
     return (0);
 }
 
@@ -18,12 +18,13 @@ int main(int ac, char **av)
     t_stack stack;
     int ret;
 
+    ret = 0;
     stack.prg = *av;
     if (ac < 2)
         return (print_error(stack, NOARG));
     av += 1;
     if ((ret = init_stack(&stack, *av)))
         return (print_error(stack, ret));
-    
-    return (0);
+    // if ()
+    return (ret);
 }

@@ -18,6 +18,11 @@
 # define DUBLICATE      (1 << 2)
 # define ARGNOINT       (1 << 3)
 
+# define NOARG_MS        "\033[39;1mmissing arguments\033[0m"
+# define EOVERFLOW_MS    "\033[39;1mvalue too large to be stored in data type\033[0m"
+# define DUBLICATE_MS    "\033[39;1mthere are duplicates\033[0m"
+# define ARGNOINT_MS     "\033[39;1margument are not integer\033[0m"
+
 typedef struct      s_node
 {
     struct s_node    *next;

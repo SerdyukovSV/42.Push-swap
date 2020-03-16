@@ -6,7 +6,7 @@
 #    By: gartanis <gartanis@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 18:06:29 by gartanis          #+#    #+#              #
-#    Updated: 2020/03/15 17:39:20 by gartanis         ###   ########.fr        #
+#    Updated: 2020/03/16 19:25:02 by gartanis         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ all: $(TARGETA)
 
 $(TARGETA): $(OBJF)
 	@$(CC) $^ -o $@
-	@echo "[$(TARGETA)] \033[32mcompiling completed\033[00m"
+	@echo "\033[39;1m[$(TARGETA)]\033[00m \033[32;1mcompiling completed\033[00m"
 
 $(OBJF): $(SRCF) $(LIBF) $(INC)
 	@printf " Compiling [.:]\r"
@@ -40,11 +40,11 @@ $(OBJF): $(SRCF) $(LIBF) $(INC)
 
 clean:
 	@rm -rf *.o obj
-	@echo "[$(TARGETA)] \033[33mremoved object files\033[00m"
+	@echo "\033[39;1m[$(TARGETA)]\033[00m \033[33;1mremoved object files\033[00m"
 
 fclean: clean
 	@rm $(TARGETA)
-	@echo "[$(TARGETA)] \033[33mremoved program\033[00m"
+	@echo "\033[39;1m[$(TARGETA)]\033[00m \033[33;1mremoved program\033[00m"
 
 re: fclean all
 
