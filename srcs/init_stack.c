@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-void    ft_push_front(t_linkedlist *list, int data)
+void    ft_push_front(t_linklist *list, int data)
 {
     t_node *tmp;
 
@@ -17,11 +17,11 @@ void    ft_push_front(t_linkedlist *list, int data)
     list->size += 1;
 }
 
-t_linkedlist *creat_linkedlist()
+t_linklist *creat_linkedlist()
 {
-    t_linkedlist *tmp;
+    t_linklist *tmp;
 
-    if (!(tmp = (t_linkedlist*)malloc(sizeof(t_linkedlist))))
+    if (!(tmp = (t_linklist*)malloc(sizeof(t_linklist))))
         return (NULL);
     tmp->size = 0;
     tmp->head = tmp->tail = NULL;
@@ -29,7 +29,7 @@ t_linkedlist *creat_linkedlist()
     return (tmp);
 }
 
-void    creat_stack(t_linkedlist **list, char **str)
+void    creat_stack(t_linklist **list, char **str)
 {
     *list = creat_linkedlist();
     while (*str)
@@ -50,6 +50,9 @@ int init_stack(t_stack *stack, char *arg)
         return (NOARG);
     if ((ret = check_stack(str)))
         return (ret);
-    creat_stack(&stack->stack[STACK_A], str);
+    creat_stack(&stack->stack[A], str);
+    stack->stack[A]->letter = 'a';
+    stack->stack[B] = creat_linkedlist();
+    stack->stack[B]->letter = 'b';
     return (ret);
 }

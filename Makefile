@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gartanis <gartanis@student.42.fr>          +#+  +:+       +#+         #
+#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 18:06:29 by gartanis          #+#    #+#              #
-#    Updated: 2020/03/16 19:28:09 by gartanis         ###   ########.fr        #
+#    Updated: 2020/04/10 17:06:55 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ TARGETB := checker
 CFLAGS 	:= -Wall -Werror -Wextra
 CC 		:= gcc
 LIBF	:= libft/ft_atoi.c libft/ft_isdigit.c libft/ft_strcmp.c libft/ft_strlen.c libft/ft_strsplit.c
-SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/push_swap.c
+SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/push_swap.c srcs/sort.c srcs/options.c srcs/quick_sort.c
 OBJF 	:= $(addprefix obj/, $(notdir $(SRCF:.c=.o) $(LIBF:.c=.o)))
 INC		:= includes/push_swap.h
 OBJDIR	:= obj

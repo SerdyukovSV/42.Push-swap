@@ -7,8 +7,8 @@
 
 # define ERR_M "\033[31;1merror:\033[00m"
 
-# define STACK_A        (0)
-# define STACK_B        (1)
+# define A        (0)
+# define B        (1)
 
 /*
 ** Error message
@@ -30,21 +30,41 @@ typedef struct      s_node
     int             data;
 }                   t_node;
 
-typedef struct  s_linkedlist
+typedef struct  s_linklist
 {
     t_node      *head;
     t_node      *tail;
     size_t      size;
-}               t_linkedlist;
+    char        letter;
+}               t_linklist;
 
 typedef struct      s_stack
 {
     char            *prg;
-    t_linkedlist    *stack[2];
+    int             med;
+    t_linklist    *stack[2];
 }                   t_stack;
 
 
-int init_stack(t_stack *stack, char *arg);
-int check_stack(char **str);
+int     init_stack(t_stack *stack, char *arg);
+int     check_stack(char **str);
+void    sort_stack(t_stack *stack);
+void    small_sort(t_linklist *stack);
+void    quick_sort(t_linklist *src, t_linklist *dst);
+int     get_median(t_node *list);
+int     get_len_substack(t_node *list, int med);
+
+
+int issort(t_linklist *stack);
+
+/*
+** options
+*/
+void    rotate(t_linklist *list);
+void    revrotate(t_linklist *list);
+void    doub_revrotate(t_linklist *src, t_linklist *dst);
+void    swap(t_linklist *list);
+void    doub_swap(t_linklist *a, t_linklist *b);
+void    push(t_linklist *src, t_linklist *dst);
 
 #endif
