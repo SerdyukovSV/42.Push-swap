@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 18:32:58 by gartanis          #+#    #+#             */
-/*   Updated: 2019/09/24 19:39:33 by gartanis         ###   ########.fr       */
+/*   Updated: 2020/04/19 15:34:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+# define BUFF_SIZE 8
+
 typedef struct		s_list
 {
 	void			*content;
@@ -23,6 +25,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					get_next_line(int const fd, char **line);
 size_t				ft_strlen(const char *s);
 int					ft_atoi(const char *str);
 void				ft_bzero(void *s, size_t n);

@@ -10,6 +10,7 @@
 # define A        (0)
 # define B        (1)
 
+
 /*
 ** Error message
 */
@@ -46,25 +47,27 @@ typedef struct      s_stack
 }                   t_stack;
 
 
-int     init_stack(t_stack *stack, char *arg);
+int     init_stack(t_stack *stack, char *av[], int ac);
 int     check_stack(char **str);
 void    sort_stack(t_stack *stack);
 void    small_sort(t_linklist *stack);
 void    quick_sort(t_linklist *src, t_linklist *dst);
 int     get_median(t_node *list);
-int     get_len_substack(t_node *list, int med);
+int     is_substack(t_node *list, int med);
 
 
-int issort(t_linklist *stack);
+int     issort(t_linklist *stack);
+int     print_error(t_stack stack, int errcode);
 
 /*
 ** options
 */
-void    rotate(t_linklist *list);
-void    revrotate(t_linklist *list);
-void    doub_revrotate(t_linklist *src, t_linklist *dst);
-void    swap(t_linklist *list);
-void    doub_swap(t_linklist *a, t_linklist *b);
-void    push(t_linklist *src, t_linklist *dst);
+void    rotate(t_linklist *list, int print);
+void    doub_rotate(t_linklist *src, t_linklist *dst, int print);
+void    revrotate(t_linklist *list, int print);
+void    doub_revrotate(t_linklist *src, t_linklist *dst, int print);
+void    swap(t_linklist *list, int print);
+void    doub_swap(t_linklist *src, t_linklist *dst, int print);
+void    push(t_linklist *src, t_linklist *dst, int print);
 
 #endif

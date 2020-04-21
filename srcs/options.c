@@ -1,6 +1,6 @@
 #include "../includes/push_swap.h"
 
-void    revrotate(t_linklist *list)
+void    revrotate(t_linklist *list, int print)
 {
     t_node *tmp;
 
@@ -11,16 +11,17 @@ void    revrotate(t_linklist *list)
     list->tail = list->tail->prev;
     list->tail->next = NULL;
     list->head->prev = NULL;
-    printf("rr%c\n", list->letter);
+    print ? printf("rr%c\n", list->letter) : 0;
 }
 
-void    doub_revrotate(t_linklist *src, t_linklist *dst)
+void    doub_revrotate(t_linklist *src, t_linklist *dst, int print)
 {
-    revrotate(src);
-    revrotate(dst);
+    revrotate(src, 0);
+    revrotate(dst, 0);
+    print ? printf("rrr\n") : 0;
 }
 
-void    rotate(t_linklist *list)
+void    rotate(t_linklist *list, int print)
 {
     list->tail->next = list->head;
     list->head->prev = list->tail;
@@ -28,32 +29,34 @@ void    rotate(t_linklist *list)
     list->head = list->head->next;
     list->head->prev = NULL;
     list->tail->next = NULL;
-    printf("r%c\n", list->letter);
+    print ? printf("r%c\n", list->letter) : 0;
 }
 
-void    doub_rotate(t_linklist *src, t_linklist *dst)
+void    doub_rotate(t_linklist *src, t_linklist *dst, int print)
 {
-    rotate(src);
-    rotate(dst);
+    rotate(src, 0);
+    rotate(dst, 0);
+    print ? printf("rr\n") : 0;
 }
 
-void    swap(t_linklist *list)
+void    swap(t_linklist *list, int print)
 {
     int tmp;
 
     tmp = list->head->data;
     list->head->data = list->head->next->data;
     list->head->next->data = tmp;
-    // printf("s%c\n", list->letter);
+    print ? printf("s%c\n", list->letter) : 0;
 }
 
-void    doub_swap(t_linklist *a, t_linklist *b)
+void    doub_swap(t_linklist *src, t_linklist *dst, int print)
 {
-    swap(a);
-    swap(b);
+    swap(src, 0);
+    swap(dst, 0);
+    print ? printf("ss\n") : 0;
 }
 
-void    push(t_linklist *src, t_linklist *dst)
+void    push(t_linklist *src, t_linklist *dst, int print)
 {
     t_node *tmp;
 
@@ -74,5 +77,5 @@ void    push(t_linklist *src, t_linklist *dst)
         dst->tail = tmp;
     src->size -= 1;
     dst->size += 1;
-    // printf("p%c\n", dst->letter);
+    print ? printf("p%c\n", dst->letter) : 0;
 }

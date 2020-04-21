@@ -17,7 +17,7 @@ int get_median(t_node *list)
     return ((max + min) / 2);
 }
 
-int get_len_substack(t_node *list, int med)
+int is_substack(t_node *list, int med)
 {
     while (list)
         if (list->data < med)
@@ -46,25 +46,22 @@ void    small_sort(t_linklist *stack)
     // printf("small_sort\n");
     if (!issort(stack))
     {
-        if (stack->head->data > stack->head->next->data)
+        if (stack->size > 2 && stack->head->data > stack->head->next->data)
             if (stack->head->data > stack->head->next->next->data)
-                rotate(stack);
+                rotate(stack, 1);
             else
-                swap(stack);
+                swap(stack, 1);
         else
-            revrotate(stack);
+            revrotate(stack, 1);
         small_sort(stack);
     }
-    else
-        return ;
 }
 
 void    sort_stack(t_stack *stack)
 {
+    // printf("sort_stack\n");
     if (stack->stack[A]->size <= 3)
         small_sort(stack->stack[A]);
-    else if (stack->stack[A]->size <= 6)
-        ;
     else
         quick_sort(stack->stack[A], stack->stack[B]);
 }
