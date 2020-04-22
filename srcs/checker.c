@@ -1,31 +1,19 @@
 #include "../includes/push_swap.h"
 
-typedef void (*simpleFP)(t_linklist *lst, int print);
-typedef struct functionMETA {
-    simpleFP funcPtr;
-    char * funcName;
-} functionMETA;
-
-void    print_stack(t_stack *stack)
+void    print_stack(t_node *src, t_node *dst, char *opt)
 {
-    t_node *tmp;
-    tmp = stack->stack[A]->head;
-    printf("stack_a = ");
-    while (tmp)
+    system("clear");
+    printf("Operation : \033[33;1m%s\033[00m\n\n", opt ? opt : "");
+    printf("  Stack A   Stack B\n");
+    while (src || dst)
     {
-        printf("%d ",tmp->data);
-        tmp = tmp->next;
+        src ? printf("%9d |",src->data) : printf("          |");
+        dst ? printf("%2d", dst->data) : printf("  ");
+        src ? (src = src->next) : 0;
+        dst ? (dst = dst->next) : 0;
+        printf("\n");
     }
-    printf("\n");
-
-    tmp = stack->stack[B]->head;
-    printf("stack_b = ");
-    while (tmp)
-    {
-        printf("%d ",tmp->data);
-        tmp = tmp->next;
-    }
-    printf("\n");
+    
 }
 
 
@@ -44,36 +32,34 @@ void    do_option(t_linklist *src, t_linklist *dst, char *opt)
     !ft_strcmp("rrr", opt) ? doub_revrotate(src, dst, 0) : 0;
 }
 
-
-
-int get_options(t_stack *stack)
+int get_options(t_linklist *src, t_linklist *dst)
 {
-    t_linklist *src;
-    t_linklist *dst;
     char *opt;
     int ret;
 
-    src = stack->stack[0];
-    dst = stack->stack[1];
     while ((ret = get_next_line(0, &opt)) > 0)
     {
+        // print_stack(src->head, dst->head, opt);
         do_option(src, dst, opt);
+        // system("sleep 0.05");
         free(opt);
     }
+    // print_stack(src->head, dst->head, NULL);
     return (ret);
 }
 
-int main(int ac, char *av[])
+int main(int ac, char **av)
 {
     t_stack stack;
     int ret;
 
+    stack.prg = *av;
     if (ac < 2)
         return (print_error(stack, -1));
     av += 1;
     if ((ret = init_stack(&stack, av, ac)))
         return (print_error(stack, -1));
-    ret = get_options(&stack);
-    print_stack(&stack);
+    ret = get_options(stack.stack[0], stack.stack[1]);
+    printf("%s\n", issort(stack.stack[0]) ? OK : KO);
     return (0);
 }

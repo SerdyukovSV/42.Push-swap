@@ -48,7 +48,8 @@ void    rotate_stack(t_linklist *src, t_linklist *dst, int med)
 static void merger_stack(t_linklist *src, t_linklist *dst)
 {
     // printf("merger_stack\n");
-while (issort(src) && dst->size > 0)
+
+    while (issort(src) && dst->size > 0)
     {
         if (dst->size > 1 && dst->head->data > dst->head->next->data)
         {

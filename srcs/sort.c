@@ -60,8 +60,8 @@ void    small_sort(t_linklist *stack)
 void    sort_stack(t_stack *stack)
 {
     // printf("sort_stack\n");
-    if (stack->stack[A]->size <= 3)
-        small_sort(stack->stack[A]);
+    if (stack->stack[0]->size <= 3)
+        small_sort(stack->stack[0]);
     else
-        quick_sort(stack->stack[A], stack->stack[B]);
+        quick_sort(stack->stack[0], stack->stack[1]);
 }

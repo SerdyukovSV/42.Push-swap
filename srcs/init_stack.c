@@ -75,9 +75,9 @@ int init_stack(t_stack *stack, char *av[], int ac)
         return (NOARG);
     if ((ret = check_stack(str)))
         return (ret);
-    creat_stack(&stack->stack[A], str);
-    stack->stack[A]->letter = 'a';
-    stack->stack[B] = creat_linkedlist();
-    stack->stack[B]->letter = 'b';
+    creat_stack(&stack->stack[0], str);
+    stack->stack[0]->letter = 'a';
+    stack->stack[1] = creat_linkedlist();
+    stack->stack[1]->letter = 'b';
     return (ret);
 }

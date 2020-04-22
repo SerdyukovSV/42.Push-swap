@@ -2,27 +2,36 @@
 # define FT_PUSH_SWAP
 
 # include "../libft/libft.h"
-
 # include <stdio.h>
 
-# define ERR_M "\033[31;1merror:\033[00m"
+#define OPT "vc"
 
-# define A        (0)
-# define B        (1)
+/*
+** color
+*/
 
+# define YELLOW   \033[33;1m
+# define GREEN    \033[32;1m
+# define WHITE	  \033[39;1m
+# define RED	  \033[31;1m
+# define EOC	  \033[00m
 
 /*
 ** Error message
 */
+
 # define NOARG          (1 << 0)
 # define EOVERFLOW      (1 << 1)
 # define DUBLICATE      (1 << 2)
 # define ARGNOINT       (1 << 3)
 
+# define ERR_M           "\033[31;1merror:\033[00m"
 # define NOARG_MS        "\033[39;1mmissing arguments\033[0m"
 # define EOVERFLOW_MS    "\033[39;1mvalue too large to be stored in data type\033[0m"
 # define DUBLICATE_MS    "\033[39;1mthere are duplicates\033[0m"
 # define ARGNOINT_MS     "\033[39;1margument are not integer\033[0m"
+# define OK              "\033[32;1mOK\033[00m"
+# define KO              "\033[31;1mKO\033[00m"
 
 typedef struct      s_node
 {

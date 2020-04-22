@@ -8,62 +8,64 @@
 #define BUF_SIZE 1000
 #define OPT "psrab"
 
-typedef void (*simpleFP)(char *s1, char *s2, int print);
+typedef void (*simpleFP);
 typedef struct functionMETA {
     simpleFP funcPtr;
     char * funcName;
 } functionMETA;
 
-functionMETA arrFuncPtrs[6] = {
-    {f1, "f"},
-    {f2, "ff"},
-    {push, "p"},
-    {swap, "s"},
-    {rotate, "r"},
-    {revrotate, "rr"}
+// functionMETA arrFuncPtrs[6] = {
+//     {f1, "f"},
+//     {f2, "ff"},
+//     {push, "p"},
+//     {swap, "s"},
+//     {rotate, "r"},
+//     {revrotate, "rr"}
 
-};
+// };
 
-void f1(int s1, int s2, int print) {
-    printf("s1 = %s | s2 = %s | print = %d", s1, s2, print);
-}
-void f2(int s1, int s2, int print) {
-    printf("s1 = %s | s2 = %s | print = %d", s1, s2, print);
-}
+// void f1(int s1, int s2, int print) {
+//     printf("s1 = %s | s2 = %s | print = %d", s1, s2, print);
+// }
+// void f2(int s1, int s2, int print) {
+//     printf("s1 = %s | s2 = %s | print = %d", s1, s2, print);
+// }
 
-int main()
-{
-    char *str = "fa";
-    int s1 = 1;
-    int s2 = 2;
-    int ln;
+// int main()
+// {
+//     char *str = "fa";
+//     int s1 = 1;
+//     int s2 = 2;
+//     int ln;
 
-    if (ft_strchr(str, 'b'))
-    {
-        s1 = 2;
-        s2 = 1;
-    }
+//     if (ft_strchr(str, 'b'))
+//     {
+//         s1 = 2;
+//         s2 = 1;
+//     }
         
 
-    for(int i=0; i<3; i++)
-    {
-        ln = ft_strlen(str);
-        if (ft_strchr(str, 'a') || ft_strchr(str, 'b'))
-        if (ft_strnstr(str, arrFuncPtrs[i].funcName, ln - 1))
-            if (ft_strchr(++str, arrFuncPtrs[i].funcName + 1))
-    }
-}
-
-// int main(void)
-// {
-//     t_stack stack;
-//     t_linklist *src = stack.stack;
-//     t_linklist *dst;
-//     functionMETA arrFuncPtrs[11] =
+//     for(int i=0; i<3; i++)
 //     {
-//         {swap}
+//         ln = ft_strlen(str);
+//         // if (ft_strchr(str, 'a') || ft_strchr(str, 'b'))
+//         if (ft_strnstr(str, arrFuncPtrs[i].funcName, ln - 1))
+//             if (ft_strchr(++str, arrFuncPtrs[i].funcName + 1))
 //     }
 // }
+
+int main(void)
+{
+    int i = 5;
+    while (i--)
+    {
+        printf("%d\n", i);
+        system("sleep 0.5");
+        
+    }
+    return (0);
+
+}
 
 
 // int main(int ac, char *av[])
