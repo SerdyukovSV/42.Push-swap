@@ -2,8 +2,11 @@
 
 void    print_stack(t_node *src, t_node *dst, char *opt)
 {
+    static int count;
+
+    !count ? (count = 0) : 0;
     system("clear");
-    printf("Operation : \033[33;1m%s\033[00m\n\n", opt ? opt : "");
+    printf("Operation : \033[33;1m%s\033[00m\nCounter   : %d\n", opt ? opt : "", count++);
     printf("  Stack A   Stack B\n");
     while (src || dst)
     {
@@ -13,38 +16,43 @@ void    print_stack(t_node *src, t_node *dst, char *opt)
         dst ? (dst = dst->next) : 0;
         printf("\n");
     }
-    
 }
 
 
-void    do_option(t_linklist *src, t_linklist *dst, char *opt)
+void    do_option(t_linklist *src, t_linklist *dst, t_stack *stack, char *opt)
 {
-    !ft_strcmp("pb", opt) ? push(src, dst, 0) : 0;
-    !ft_strcmp("pa", opt) ? push(dst, src, 0) : 0;
-    !ft_strcmp("sa", opt) ? swap(src, 0) : 0;
-    !ft_strcmp("sb", opt) ? swap(dst, 0) : 0;
-    !ft_strcmp("ss", opt) ? doub_swap(src, dst, 0) : 0;
-    !ft_strcmp("ra", opt) ? rotate(src, 0) : 0;
-    !ft_strcmp("rb", opt) ? rotate(dst, 0) : 0;
-    !ft_strcmp("rr", opt) ? doub_rotate(src, dst, 0) : 0;
-    !ft_strcmp("rra", opt) ? revrotate(src, 0) : 0;
-    !ft_strcmp("rrb", opt) ? revrotate(dst, 0) : 0;
-    !ft_strcmp("rrr", opt) ? doub_revrotate(src, dst, 0) : 0;
+    !ft_strcmp("pb", opt) ? push(src, dst, stack) : 0;
+    !ft_strcmp("pa", opt) ? push(dst, src, stack) : 0;
+    !ft_strcmp("sa", opt) ? swap(src, stack) : 0;
+    !ft_strcmp("sb", opt) ? swap(dst, stack) : 0;
+    !ft_strcmp("ss", opt) ? doub_swap(src, dst, stack) : 0;
+    !ft_strcmp("ra", opt) ? rotate(src, stack) : 0;
+    !ft_strcmp("rb", opt) ? rotate(dst, stack) : 0;
+    !ft_strcmp("rr", opt) ? doub_rotate(src, dst, stack) : 0;
+    !ft_strcmp("rra", opt) ? revrotate(src, stack) : 0;
+    !ft_strcmp("rrb", opt) ? revrotate(dst, stack) : 0;
+    !ft_strcmp("rrr", opt) ? doub_revrotate(src, dst, stack) : 0;
 }
 
-int get_options(t_linklist *src, t_linklist *dst)
+int get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
     char *opt;
     int ret;
 
-    while ((ret = get_next_line(0, &opt)) > 0)
+    if (stack->opt & OPT_F)
+        stack->fd = open("operation_ps.txt", O_RDONLY);
+    while ((ret = get_next_line(stack->fd, &opt)) > 0)
     {
-        // print_stack(src->head, dst->head, opt);
-        do_option(src, dst, opt);
-        // system("sleep 0.05");
+        if (stack->opt & OPT_V)
+        {
+            print_stack(src->head, dst->head, opt);
+            system("sleep 0.01");
+        }
+        do_option(src, dst, stack, opt);
         free(opt);
     }
-    // print_stack(src->head, dst->head, NULL);
+    if (stack->opt & OPT_V)
+        print_stack(src->head, dst->head, NULL);
     return (ret);
 }
 
@@ -54,12 +62,14 @@ int main(int ac, char **av)
     int ret;
 
     stack.prg = *av;
+    stack.print = 0;
+    stack.fd = 0;
     if (ac < 2)
         return (print_error(stack, -1));
     av += 1;
     if ((ret = init_stack(&stack, av, ac)))
         return (print_error(stack, -1));
-    ret = get_options(stack.stack[0], stack.stack[1]);
+    ret = get_operations(stack.stack[0], stack.stack[1], &stack);
     printf("%s\n", issort(stack.stack[0]) ? OK : KO);
     return (0);
 }

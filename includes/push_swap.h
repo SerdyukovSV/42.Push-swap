@@ -4,17 +4,15 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
-#define OPT "vc"
-
 /*
 ** color
 */
 
-# define YELLOW   \033[33;1m
-# define GREEN    \033[32;1m
-# define WHITE	  \033[39;1m
-# define RED	  \033[31;1m
-# define EOC	  \033[00m
+// # define YELLOW   \033[33;1m
+// # define GREEN    \033[32;1m
+// # define WHITE	  \033[39;1m
+// # define RED	  \033[31;1m
+// # define EOC	  \033[00m
 
 /*
 ** Error message
@@ -32,6 +30,10 @@
 # define ARGNOINT_MS     "\033[39;1margument are not integer\033[0m"
 # define OK              "\033[32;1mOK\033[00m"
 # define KO              "\033[31;1mKO\033[00m"
+
+# define OPT_V (1 << 0)
+# define OPT_C (1 << 1)
+# define OPT_F (1 << 2)
 
 typedef struct      s_node
 {
@@ -51,7 +53,10 @@ typedef struct  s_linklist
 typedef struct      s_stack
 {
     char            *prg;
-    int             med;
+    int             div;
+    int             opt;
+    int             fd;
+    int             print;
     t_linklist    *stack[2];
 }                   t_stack;
 
@@ -59,24 +64,26 @@ typedef struct      s_stack
 int     init_stack(t_stack *stack, char *av[], int ac);
 int     check_stack(char **str);
 void    sort_stack(t_stack *stack);
-void    small_sort(t_linklist *stack);
-void    quick_sort(t_linklist *src, t_linklist *dst);
-int     get_median(t_node *list);
+void    small_sort(t_linklist *list, t_stack *stack);
+void    quick_sort(t_linklist *src, t_linklist *dst, t_stack *stack);
+int     get_median(t_linklist *stack, int div);
 int     is_substack(t_node *list, int med);
+char    **get_arg(t_stack *stack, int ac, char *av[]);
 
 
 int     issort(t_linklist *stack);
 int     print_error(t_stack stack, int errcode);
+void    ft_print_options(t_stack *stack, const char *str, const char let);
 
 /*
 ** options
 */
-void    rotate(t_linklist *list, int print);
-void    doub_rotate(t_linklist *src, t_linklist *dst, int print);
-void    revrotate(t_linklist *list, int print);
-void    doub_revrotate(t_linklist *src, t_linklist *dst, int print);
-void    swap(t_linklist *list, int print);
-void    doub_swap(t_linklist *src, t_linklist *dst, int print);
-void    push(t_linklist *src, t_linklist *dst, int print);
+void    rotate(t_linklist *list, t_stack *stack);
+void    doub_rotate(t_linklist *src, t_linklist *dst, t_stack *stack);
+void    revrotate(t_linklist *list, t_stack *stack);
+void    doub_revrotate(t_linklist *src, t_linklist *dst, t_stack *stack);
+void    swap(t_linklist *list, t_stack *stack);
+void    doub_swap(t_linklist *src, t_linklist *dst, t_stack *stack);
+void    push(t_linklist *src, t_linklist *dst, t_stack *stack);
 
 #endif

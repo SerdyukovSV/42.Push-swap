@@ -8,11 +8,14 @@ int main(int ac, char *av[])
 
     ret = 0;
     stack.prg = *av;
+    stack.print = 1;
     if (ac < 2)
         return (print_error(stack, NOARG));
     av += 1;
     if ((ret = init_stack(&stack, av, ac)))
         return (print_error(stack, ret));
-    sort_stack(&stack);    
+    if (stack.opt & OPT_F)
+        stack.fd = open("operation_ps.txt", O_WRONLY|O_CREAT|O_TRUNC);
+    sort_stack(&stack);
     return (ret);
 }

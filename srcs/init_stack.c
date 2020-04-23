@@ -10,7 +10,7 @@ int print_error(t_stack stack, int errcode)
         printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, DUBLICATE_MS);
     if (errcode & ARGNOINT)
         printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, ARGNOINT_MS);
-    if (errcode & -1)
+    if (errcode == -1)
         printf("Error\n");
     return (0);
 }
@@ -32,24 +32,28 @@ void    ft_push_front(t_linklist *list, int data)
     list->size += 1;
 }
 
-t_linklist *creat_linkedlist()
+t_linklist *creat_linkedlist(char lett)
 {
     t_linklist *tmp;
 
     if (!(tmp = (t_linklist*)malloc(sizeof(t_linklist))))
         return (NULL);
     tmp->size = 0;
+    tmp->letter = lett;
     tmp->head = tmp->tail = NULL;
 
     return (tmp);
 }
 
-void    creat_stack(t_linklist **list, char **str)
+void    creat_stack(t_stack *stack, char **str)
 {
-    *list = creat_linkedlist();
+    if (!(stack->stack[0] = creat_linkedlist('a')))
+        exit (1);
+    if (!(stack->stack[1] = creat_linkedlist('b')))
+        exit (1);
     while (*str)
     {
-        ft_push_front(*list, ft_atoi(*str));
+        ft_push_front(stack->stack[0], ft_atoi(*str));
         str += 1;
     }
 }
@@ -60,24 +64,11 @@ int init_stack(t_stack *stack, char *av[], int ac)
     int ret;
     int i;
 
-    i = 0;
-    if (ac == 2)
-        str = ft_strsplit(av[0], ' ');
-    else if (ac > 2)
-    {
-        if (!(str = (char **)malloc(sizeof(char *) * ac)))
-            return (0);
-        while (av[i])
-            str[i] = ft_strdup((const char *)av[i++]);
-        str[i] = NULL;
-    }
+    str = get_arg(stack, ac, av);
     if (!*str)
         return (NOARG);
     if ((ret = check_stack(str)))
         return (ret);
-    creat_stack(&stack->stack[0], str);
-    stack->stack[0]->letter = 'a';
-    stack->stack[1] = creat_linkedlist();
-    stack->stack[1]->letter = 'b';
+    creat_stack(stack, str);
     return (ret);
 }

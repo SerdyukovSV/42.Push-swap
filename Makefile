@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 18:06:29 by gartanis          #+#    #+#              #
-#    Updated: 2020/04/19 16:57:49 by marvin           ###   ########.fr        #
+#    Updated: 2020/04/23 11:23:13 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,8 @@ TARGETA	:= push_swap
 TARGETB := checker
 CFLAGS 	:= -Wall -Werror -Wextra
 CC 		:= gcc
-# LIBF	:= libft/ft_atoi.c libft/ft_isdigit.c libft/ft_strcmp.c libft/ft_strlen.c libft/ft_strsplit.c libft/ft_strdup.c libft/ get_next_line.c
 LIBF	:= libft/$(SRC_CH:.c=.o)
-SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/sort.c srcs/options.c srcs/quick_sort.c
+SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/sort.c srcs/operations.c srcs/quick_sort.c srcs/get_arg.c
 SRC_PW	:= srcs/push_swap.c
 SRC_CH	:= srcs/checker.c
 OBJF 	:= $(addprefix obj/, $(notdir $(SRCF:.c=.o) $(LIBF:.c=.o)))

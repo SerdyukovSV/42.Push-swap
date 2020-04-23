@@ -1,20 +1,32 @@
 #include "../includes/push_swap.h"
 
-int get_median(t_node *list)
+int get_median(t_linklist *stack, int div)
 {
+    t_node *list;
     int max;
     int min;
+    int ret;
 
+    list = stack->head;
     max = min = list->data;
     while (list)
     {
-        if (max < list->data)
-            max = list->data;
-        if (min > list->data)
-            min = list->data;
+        (max < list->data) ? max = list->data : 0;
+        (min > list->data) ? min = list->data : 0;
         list = list->next;
     }
-    return ((max + min) / 2);
+    if (stack->size > 20)
+        if ((ret = (max + min) / div) <= min)
+            return (get_median(stack, div - 1));
+        else
+        {
+            // printf("med = %d\n", ret);
+            return (ret);
+        }
+    else
+        ret = (max + min) / 2;
+    // printf("med = %d\n", ret);
+    return (ret);
 }
 
 int is_substack(t_node *list, int med)
@@ -41,19 +53,19 @@ int issort(t_linklist *stack)
     return (!(stack->letter == 'a' ? tmp->next : tmp->prev));
 }
 
-void    small_sort(t_linklist *stack)
+void    small_sort(t_linklist *list, t_stack *stack)
 {
     // printf("small_sort\n");
-    if (!issort(stack))
+    if (!issort(list))
     {
-        if (stack->size > 2 && stack->head->data > stack->head->next->data)
-            if (stack->head->data > stack->head->next->next->data)
-                rotate(stack, 1);
+        if (list->size > 2 && list->head->data > list->head->next->data)
+            if (list->head->data > list->head->next->next->data)
+                rotate(list, stack);
             else
-                swap(stack, 1);
+                swap(list, stack);
         else
-            revrotate(stack, 1);
-        small_sort(stack);
+            revrotate(list, stack);
+        small_sort(list, stack);
     }
 }
 
@@ -61,7 +73,7 @@ void    sort_stack(t_stack *stack)
 {
     // printf("sort_stack\n");
     if (stack->stack[0]->size <= 3)
-        small_sort(stack->stack[0]);
+        small_sort(stack->stack[0], stack);
     else
-        quick_sort(stack->stack[0], stack->stack[1]);
+        quick_sort(stack->stack[0], stack->stack[1], stack);
 }
