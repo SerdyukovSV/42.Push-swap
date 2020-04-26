@@ -19,13 +19,9 @@ int get_median(t_linklist *stack, int div)
         if ((ret = (max + min) / div) <= min)
             return (get_median(stack, div - 1));
         else
-        {
-            // printf("med = %d\n", ret);
             return (ret);
-        }
     else
         ret = (max + min) / 2;
-    // printf("med = %d\n", ret);
     return (ret);
 }
 
@@ -55,7 +51,6 @@ int issort(t_linklist *stack)
 
 void    small_sort(t_linklist *list, t_stack *stack)
 {
-    // printf("small_sort\n");
     if (!issort(list))
     {
         if (list->size > 2 && list->head->data > list->head->next->data)
@@ -71,7 +66,6 @@ void    small_sort(t_linklist *list, t_stack *stack)
 
 void    sort_stack(t_stack *stack)
 {
-    // printf("sort_stack\n");
     if (stack->stack[0]->size <= 3)
         small_sort(stack->stack[0], stack);
     else

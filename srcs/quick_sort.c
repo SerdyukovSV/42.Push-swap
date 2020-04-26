@@ -2,7 +2,6 @@
 
 void    swap_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 {
-    // printf("swap_stack\n");
     if (src->head->data > src->head->next->data)
         if (src->head->next->data < med)
             if (dst->size > 2 && dst->head->next->data > dst->head->data && \
@@ -17,7 +16,6 @@ void    swap_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 
 void    revrotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 {
-    // printf("revrotate_stack\n");
     if (src->head->data > src->tail->data)
         if (src->tail->data < med)
             if (dst->size > 2 && dst->head->next->data < dst->head->data && \
@@ -32,7 +30,6 @@ void    revrotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stac
 
 void    rotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 {
-    // printf("rotate_stack\n");
     if (src->head->data >= med)
         if (med <= src->head->next->data)
             if (dst->size > 2 && dst->head->next->data > dst->head->data && \
@@ -47,14 +44,11 @@ void    rotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 
 static void merger_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
-    // printf("merger_stack\n");
     while (issort(src) && dst->size > 0)
     {
         if (dst->size > 1 && dst->head->data > dst->head->next->data)
-        {
             if (dst->head->data > dst->tail->data)
                 push(dst, src, stack);
-        }
         else if (dst->size < 3)
             push(dst, src, stack);
         swap_stack(src, dst, get_median(src, stack->div), stack);
@@ -65,8 +59,6 @@ static void merger_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
 
 static void split_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 {
-    // printf("split_stack\n");
-    // printf("med %d\n", med);
     while (is_substack(src->head, med) && !issort(src) && src->size > 3)
     {
         if (src->head->data < src->head->next->data && src->head->data < med)
@@ -80,7 +72,6 @@ static void split_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stac
 
 void    quick_sort(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
-    // printf("quick_sort\n");
     stack->div = 4;
     if (!issort(src))
     {

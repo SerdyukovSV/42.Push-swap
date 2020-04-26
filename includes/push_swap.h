@@ -4,15 +4,7 @@
 # include "../libft/libft.h"
 # include <stdio.h>
 
-/*
-** color
-*/
-
-// # define YELLOW   \033[33;1m
-// # define GREEN    \033[32;1m
-// # define WHITE	  \033[39;1m
-// # define RED	  \033[31;1m
-// # define EOC	  \033[00m
+# define OUTPUT_PS "OPERATIONS.txt"
 
 /*
 ** Error message
@@ -57,6 +49,7 @@ typedef struct      s_stack
     int             opt;
     int             fd;
     int             print;
+    int             nbr_a;
     t_linklist    *stack[2];
 }                   t_stack;
 

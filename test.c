@@ -8,12 +8,30 @@
 #define BUF_SIZE 1000
 #define OPT "psrab"
 
+int ft_instr(char *haystack, char *needle)
+{
+    while (*haystack)
+    {
+        while (*needle && *haystack == *needle)
+        {
+            haystack++;
+            needle++;
+        }
+        if (*needle == '\0')
+            return (1);
+        haystack++;
+    }
+    return (0);
+}
 
 int main(int ac, char *av[])
 {
-    int i = 0;
-    i |= (1 << 2);
-    printf("%d\n", i);
+    char *str;
+    int *a;
+    int i = NULL;
+
+    // a = &i;
+    printf("i = %d\n", i);
     return (0);
 
 }

@@ -1,12 +1,14 @@
 #include "../includes/push_swap.h"
 
-void    print_stack(t_node *src, t_node *dst, char *opt)
+static void    print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
 {
     static int count;
+    int a;
+    int b;
 
     !count ? (count = 0) : 0;
     system("clear");
-    printf("Operation : \033[33;1m%s\033[00m\nCounter   : %d\n", opt ? opt : "", count++);
+    printf("Operation : \033[33;1m%s\033[m\nCounter   : %d\n", opt ? opt : "", count++);
     printf("  Stack A   Stack B\n");
     while (src || dst)
     {
@@ -19,7 +21,7 @@ void    print_stack(t_node *src, t_node *dst, char *opt)
 }
 
 
-void    do_option(t_linklist *src, t_linklist *dst, t_stack *stack, char *opt)
+static void    do_operation(t_linklist *src, t_linklist *dst, t_stack *stack, char *opt)
 {
     !ft_strcmp("pb", opt) ? push(src, dst, stack) : 0;
     !ft_strcmp("pa", opt) ? push(dst, src, stack) : 0;
@@ -34,25 +36,25 @@ void    do_option(t_linklist *src, t_linklist *dst, t_stack *stack, char *opt)
     !ft_strcmp("rrr", opt) ? doub_revrotate(src, dst, stack) : 0;
 }
 
-int get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
+static int get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
     char *opt;
     int ret;
 
     if (stack->opt & OPT_F)
-        stack->fd = open("operation_ps.txt", O_RDONLY);
+        stack->fd = open(OUTPUT_PS, O_RDONLY);
     while ((ret = get_next_line(stack->fd, &opt)) > 0)
     {
         if (stack->opt & OPT_V)
         {
-            print_stack(src->head, dst->head, opt);
-            system("sleep 0.01");
+            print_stack(src->head, dst->head, opt, stack);
+            system("sleep 0.05");
         }
-        do_option(src, dst, stack, opt);
+        do_operation(src, dst, stack, opt);
         free(opt);
     }
     if (stack->opt & OPT_V)
-        print_stack(src->head, dst->head, NULL);
+        print_stack(src->head, dst->head, NULL, stack);
     return (ret);
 }
 

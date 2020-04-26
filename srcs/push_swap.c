@@ -2,7 +2,6 @@
 
 int main(int ac, char *av[])
 {
-    // printf("Push_swap\n");
     t_stack stack;
     int ret;
 
@@ -15,7 +14,7 @@ int main(int ac, char *av[])
     if ((ret = init_stack(&stack, av, ac)))
         return (print_error(stack, ret));
     if (stack.opt & OPT_F)
-        stack.fd = open("operation_ps.txt", O_WRONLY|O_CREAT|O_TRUNC);
+        stack.fd = open(OUTPUT_PS, O_WRONLY|O_CREAT|O_TRUNC);
     sort_stack(&stack);
     return (ret);
 }
