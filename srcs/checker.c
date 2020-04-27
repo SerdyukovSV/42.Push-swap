@@ -3,8 +3,6 @@
 static void    print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
 {
     static int count;
-    int a;
-    int b;
 
     !count ? (count = 0) : 0;
     system("clear");
