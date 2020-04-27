@@ -49,13 +49,13 @@ $(OBJF) $(OBJ_PW) $(OBJ_CH): $(SRCF) $(SRC_PW) $(SRC_CH) $(INC)
 clean:
 	@rm -rf *.o obj includes/push_swap.h.gch
 	@cd libft/ && make clean
-	@echo "$(YELLOW)removed object files$(EOC)"
+	@echo "$(WHITE)obj files$(EOC) $(YELLOW)removed$(EOC)"
 
 fclean: clean
-	@rm $(TARGETA) $(TARGETB)
+	@rm -f $(TARGETA) $(TARGETB) OPERATIONS.txt
 	@cd libft/ && make fclean
-	@echo "$(WHITE)$(TARGETA)$(EOC) $(YELLOW)removed program$(EOC)"
-	@echo "$(WHITE)$(TARGETB)$(EOC) $(YELLOW)  removed program$(EOC)"
+	@echo "$(WHITE)$(TARGETA)$(EOC) $(YELLOW)removed$(EOC)"
+	@echo "$(WHITE)$(TARGETB)$(EOC) $(YELLOW)  removed$(EOC)"
 
 re: fclean all
 

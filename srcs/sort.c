@@ -4,11 +4,13 @@ static void    swap_stack(t_linklist *src, t_linklist *dst, int med, t_stack *st
 {
     if (src->head->data > src->head->next->data)
         if (src->head->next->data < med)
+        {
             if (dst->size > 2 && dst->head->next->data > dst->head->data && \
                 dst->head->data > dst->tail->data)
                     doub_swap(src, dst, stack);
             else
                 swap(src, stack);
+        }
     if (dst->size > 2 && dst->head->next->data > dst->head->data)
         if (dst->head->data > dst->tail->data)
             swap(dst, stack);
@@ -18,11 +20,13 @@ static void    revrotate_stack(t_linklist *src, t_linklist *dst, int med, t_stac
 {
     if (src->head->data > src->tail->data)
         if (src->tail->data < med)
+        {
             if (dst->size > 2 && dst->head->next->data < dst->head->data && \
                 dst->head->data < dst->tail->data)
                     doub_revrotate(src, dst, stack);
             else
                 revrotate(src, stack);
+        }
     if (dst->size > 2 && dst->head->next->data < dst->head->data)
         if (dst->head->data < dst->tail->data)
             revrotate(dst, stack);
@@ -32,11 +36,13 @@ static void    rotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *
 {
     if (src->head->data >= med)
         if (med <= src->head->next->data)
+        {
             if (dst->size > 2 && dst->head->next->data > dst->head->data && \
                 dst->head->data < dst->tail->data)
                     doub_rotate(src, dst, stack);
             else
                 rotate(src, stack);
+        }
     if (dst->size > 2 && dst->head->next->data > dst->head->data)
         if (dst->head->data < dst->tail->data)
             rotate(dst, stack);
