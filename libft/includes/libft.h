@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "ft_printf.h"
 
 # define BUFF_SIZE 8
 
@@ -26,6 +27,10 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+long double			ft_power(long double nbr, int n);
+int					ft_strchrpos(const char *str, int c);
+char				*ft_strrev(char *src);
+char				*ft_dectostr(int *arr, int sign, int len);
 int					get_next_line(int const fd, char **line);
 size_t				ft_strlen(const char *s);
 int					ft_atoi(const char *str);
