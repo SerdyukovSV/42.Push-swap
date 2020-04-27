@@ -1,7 +1,7 @@
 #ifndef FT_PUSH_SWAP
 # define FT_PUSH_SWAP
 
-# include "../libft/libft.h"
+# include "../libft/includes/libft.h"
 # include <stdio.h>
 
 # define OUTPUT_PS "OPERATIONS.txt"
