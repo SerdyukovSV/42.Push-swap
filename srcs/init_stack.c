@@ -1,21 +1,6 @@
 #include "../includes/push_swap.h"
 
-int print_error(t_stack stack, int errcode)
-{
-    if (errcode & NOARG)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, NOARG_MS);
-    if (errcode & EOVERFLOW)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, EOVERFLOW_MS);
-    if (errcode & DUBLICATE)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, DUBLICATE_MS);
-    if (errcode & ARGNOINT)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, ARGNOINT_MS);
-    if (errcode == -1)
-        printf("Error\n");
-    return (0);
-}
-
-void    ft_push_front(t_linklist *list, int data)
+void    ft_push_bot(t_linklist *list, int data)
 {
     t_node *tmp;
 
@@ -53,7 +38,7 @@ void    creat_stack(t_stack *stack, char **str)
         exit (1);
     while (*str)
     {
-        ft_push_front(stack->stack[0], ft_atoi(*str));
+        ft_push_bot(stack->stack[0], ft_atoi(*str));
         str += 1;
     }
 }

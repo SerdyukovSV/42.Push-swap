@@ -1,21 +1,5 @@
 #include "../includes/push_swap.h"
 
-void    ft_print_options(t_stack *stack, const char *str, const char let)
-{
-    if (stack->print)
-    {
-        ft_putstr(str);
-        let ? ft_putchar(let) : 0;
-        ft_putchar('\n');
-        if (stack->opt & OPT_F)
-        {
-            ft_putstr_fd(str, stack->fd);
-            let ? write(stack->fd, &let, 1) : 0;
-            write(stack->fd, "\n", 1);
-        }
-    }
-}
-
 static int get_opions(t_stack *stack, char *str)
 {
     int ret;

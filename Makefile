@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 18:06:29 by gartanis          #+#    #+#              #
-#    Updated: 2020/04/23 11:23:13 by marvin           ###   ########.fr        #
+#    Updated: 2020/04/27 11:16:19 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ TARGETB := checker
 CFLAGS 	:= -Wall -Werror -Wextra
 CC 		:= gcc
 LIBF	:= libft/$(SRC_CH:.c=.o)
-SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/sort.c srcs/operations.c srcs/quick_sort.c srcs/get_arg.c
+SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/sort.c srcs/operations.c srcs/operations2.c srcs/get_arg.c srcs/utility.c
 SRC_PW	:= srcs/push_swap.c
 SRC_CH	:= srcs/checker.c
 OBJF 	:= $(addprefix obj/, $(notdir $(SRCF:.c=.o) $(LIBF:.c=.o)))

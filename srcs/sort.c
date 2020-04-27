@@ -1,73 +1,75 @@
 #include "../includes/push_swap.h"
 
-int get_median(t_linklist *stack, int div)
+static void    swap_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 {
-    t_node *list;
-    int max;
-    int min;
-    int ret;
-
-    list = stack->head;
-    max = min = list->data;
-    while (list)
-    {
-        (max < list->data) ? max = list->data : 0;
-        (min > list->data) ? min = list->data : 0;
-        list = list->next;
-    }
-    if (stack->size > 20)
-        if ((ret = (max + min) / div) <= min)
-            return (get_median(stack, div - 1));
-        else
-            return (ret);
-    else
-        ret = (max + min) / 2;
-    return (ret);
-}
-
-int is_substack(t_node *list, int med)
-{
-    while (list)
-        if (list->data < med)
-            return (1);
-        else
-            list = list->next;
-    return (0);
-}
-
-int issort(t_linklist *stack)
-{
-    t_node *tmp;
-
-    tmp = stack->head;
-    if (stack->letter == 'a')
-        while (tmp->next && tmp->data < tmp->next->data)
-            tmp = tmp->next;
-    else
-        while (tmp->next && tmp->data > tmp->next->data)
-            tmp = tmp->next;
-    return (!(stack->letter == 'a' ? tmp->next : tmp->prev));
-}
-
-void    small_sort(t_linklist *list, t_stack *stack)
-{
-    if (!issort(list))
-    {
-        if (list->size > 2 && list->head->data > list->head->next->data)
-            if (list->head->data > list->head->next->next->data)
-                rotate(list, stack);
+    if (src->head->data > src->head->next->data)
+        if (src->head->next->data < med)
+            if (dst->size > 2 && dst->head->next->data > dst->head->data && \
+                dst->head->data > dst->tail->data)
+                    doub_swap(src, dst, stack);
             else
-                swap(list, stack);
-        else
-            revrotate(list, stack);
-        small_sort(list, stack);
+                swap(src, stack);
+    if (dst->size > 2 && dst->head->next->data > dst->head->data)
+        if (dst->head->data > dst->tail->data)
+            swap(dst, stack);
+}
+
+static void    revrotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
+{
+    if (src->head->data > src->tail->data)
+        if (src->tail->data < med)
+            if (dst->size > 2 && dst->head->next->data < dst->head->data && \
+                dst->head->data < dst->tail->data)
+                    doub_revrotate(src, dst, stack);
+            else
+                revrotate(src, stack);
+    if (dst->size > 2 && dst->head->next->data < dst->head->data)
+        if (dst->head->data < dst->tail->data)
+            revrotate(dst, stack);
+}
+
+static void    rotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
+{
+    if (src->head->data >= med)
+        if (med <= src->head->next->data)
+            if (dst->size > 2 && dst->head->next->data > dst->head->data && \
+                dst->head->data < dst->tail->data)
+                    doub_rotate(src, dst, stack);
+            else
+                rotate(src, stack);
+    if (dst->size > 2 && dst->head->next->data > dst->head->data)
+        if (dst->head->data < dst->tail->data)
+            rotate(dst, stack);
+}
+
+void merger_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
+{
+    while (issort(src) && dst->size > 0)
+    {
+        if (dst->size > 1 && dst->head->data > dst->head->next->data)
+        {
+            if (dst->head->data > dst->tail->data)
+                push(dst, src, stack);
+        }
+        else if (dst->size < 3)
+            push(dst, src, stack);
+        swap_stack(src, dst, get_median(src, stack->div), stack);
+        revrotate_stack(src, dst, get_median(src, stack->div), stack);
+        rotate_stack(src, dst, get_median(src, stack->div), stack);
     }
 }
 
-void    sort_stack(t_stack *stack)
+void split_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
 {
-    if (stack->stack[0]->size <= 3)
-        small_sort(stack->stack[0], stack);
-    else
-        quick_sort(stack->stack[0], stack->stack[1], stack);
+    while (is_substack(src->head, med) && !issort(src) && src->size > 3)
+    {
+        if (src->head->data < src->head->next->data && src->head->data < med)
+            if (src->head->data < src->tail->data)
+                push(src, dst, stack);
+        swap_stack(src, dst, med, stack);
+        revrotate_stack(src, dst, med, stack);
+        rotate_stack(src, dst, med, stack);
+    }
 }
+
+

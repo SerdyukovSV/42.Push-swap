@@ -49,28 +49,31 @@ typedef struct      s_stack
     int             opt;
     int             fd;
     int             print;
-    int             nbr_a;
     t_linklist    *stack[2];
 }                   t_stack;
 
 
 int     init_stack(t_stack *stack, char *av[], int ac);
+char    **get_arg(t_stack *stack, int ac, char *av[]);
 int     check_stack(char **str);
+
+int     get_median(t_linklist *stack, int div);
+int     is_substack(t_node *list, int med);
+int     issort(t_linklist *stack);
+
+int     print_error(t_stack stack, int errcode);
+void    print_operation(t_stack *stack, const char *str, const char let);
+
 void    sort_stack(t_stack *stack);
 void    small_sort(t_linklist *list, t_stack *stack);
 void    quick_sort(t_linklist *src, t_linklist *dst, t_stack *stack);
-int     get_median(t_linklist *stack, int div);
-int     is_substack(t_node *list, int med);
-char    **get_arg(t_stack *stack, int ac, char *av[]);
-
-
-int     issort(t_linklist *stack);
-int     print_error(t_stack stack, int errcode);
-void    ft_print_options(t_stack *stack, const char *str, const char let);
+void    merger_stack(t_linklist *src, t_linklist *dst, t_stack *stack);
+void    split_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack);
 
 /*
-** options
+** operations
 */
+
 void    rotate(t_linklist *list, t_stack *stack);
 void    doub_rotate(t_linklist *src, t_linklist *dst, t_stack *stack);
 void    revrotate(t_linklist *list, t_stack *stack);
