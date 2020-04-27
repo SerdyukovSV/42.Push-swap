@@ -3,15 +3,15 @@
 int print_error(t_stack stack, int errcode)
 {
     if (errcode & NOARG)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, NOARG_MS);
+        ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, NOARG_MS);
     if (errcode & EOVERFLOW)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, EOVERFLOW_MS);
+        ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, EOVERFLOW_MS);
     if (errcode & DUBLICATE)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, DUBLICATE_MS);
+        ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, DUBLICATE_MS);
     if (errcode & ARGNOINT)
-        printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, ARGNOINT_MS);
+        ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, ARGNOINT_MS);
     if (errcode == -1)
-        printf("Error\n");
+        ft_printf("Error\n");
     return (0);
 }
 

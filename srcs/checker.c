@@ -8,15 +8,15 @@ static void    print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
 
     !count ? (count = 0) : 0;
     system("clear");
-    printf("Operation : \033[33;1m%s\033[m\nCounter   : %d\n", opt ? opt : "", count++);
-    printf("  Stack A   Stack B\n");
+    ft_printf("Operation : \033[33;1m%s\033[m\nCounter   : %d\n", opt ? opt : "", count++);
+    ft_printf("  Stack A   Stack B\n");
     while (src || dst)
     {
-        src ? printf("%9d |",src->data) : printf("          |");
-        dst ? printf("%2d", dst->data) : printf("  ");
+        src ? ft_printf("%9d |",src->data) : ft_printf("          |");
+        dst ? ft_printf("%2d", dst->data) : ft_printf("  ");
         src ? (src = src->next) : 0;
         dst ? (dst = dst->next) : 0;
-        printf("\n");
+        ft_printf("\n");
     }
 }
 
@@ -72,6 +72,6 @@ int main(int ac, char **av)
     if ((ret = init_stack(&stack, av, ac)))
         return (print_error(stack, -1));
     ret = get_operations(stack.stack[0], stack.stack[1], &stack);
-    printf("%s\n", issort(stack.stack[0]) ? OK : KO);
+    ft_printf("%s\n", issort(stack.stack[0]) ? OK : KO);
     return (0);
 }

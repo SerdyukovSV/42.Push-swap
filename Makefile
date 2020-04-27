@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/07 18:06:29 by gartanis          #+#    #+#              #
-#    Updated: 2020/04/27 11:16:19 by marvin           ###   ########.fr        #
+#    Updated: 2020/04/27 16:23:14 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,10 @@ OBJ_CH	:= $(addprefix obj/, $(notdir $(SRC_CH:.c=.o)))
 INC		:= includes/push_swap.h
 OBJDIR	:= obj
 
-# VPATH := includes srcs
-# VAR := $(NAME) checker
-# VAR := $(addprefix xyu_, $(VAR))
-# VAR := $(addsuffix _pizda, $(VAR))
 YELLOW 	:= \033[33;1m
 GREEN 	:= \033[32;1m
 WHITE	:= \033[39;1m
 EOC		:= \033[00m
-
 
 all: $(TARGETA) $(TARGETB)
 
