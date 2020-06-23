@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utility.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/23 16:10:32 by gartanis          #+#    #+#             */
+/*   Updated: 2020/06/23 16:11:31 by gartanis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 int		print_error(t_stack stack, int errcode)
@@ -5,11 +17,14 @@ int		print_error(t_stack stack, int errcode)
 	if (errcode & NOARG)
 		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, NOARG_MS);
 	if (errcode & EOVERFLOW)
-		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, EOVERFLOW_MS);
+		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, \
+					EOVERFLOW_MS);
 	if (errcode & DUBLICATE)
-		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, DUBLICATE_MS);
+		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, \
+					DUBLICATE_MS);
 	if (errcode & ARGNOINT)
-		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, ARGNOINT_MS);
+		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, \
+					ARGNOINT_MS);
 	if (errcode == -1)
 		ft_printf("Error\n");
 	return (0);
@@ -39,7 +54,8 @@ int		get_median(t_linklist *stack, int div)
 	int		ret;
 
 	list = stack->head;
-	max = min = list->data;
+	max = list->data;
+	min = list->data;
 	while (list)
 	{
 		(max < list->data) ? max = list->data : 0;

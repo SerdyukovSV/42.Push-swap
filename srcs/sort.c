@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/23 16:07:25 by gartanis          #+#    #+#             */
+/*   Updated: 2020/06/23 16:08:24 by gartanis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
-static void	swap_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
+static void	swap_stack(t_linklist *src, t_linklist *dst, int med, \
+						t_stack *stack)
 {
 	if (src->head->data > src->head->next->data)
 		if (src->head->next->data < med)
@@ -16,7 +29,8 @@ static void	swap_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack
 			swap(dst, stack);
 }
 
-static void	revrotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
+static void	revrotate_stack(t_linklist *src, t_linklist *dst, int med, \
+							t_stack *stack)
 {
 	if (src->head->data > src->tail->data)
 		if (src->tail->data < med)
@@ -32,7 +46,8 @@ static void	revrotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *
 			revrotate(dst, stack);
 }
 
-static void	rotate_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
+static void	rotate_stack(t_linklist *src, t_linklist *dst, int med, \
+						t_stack *stack)
 {
 	if (src->head->data >= med)
 		if (med <= src->head->next->data)
@@ -65,7 +80,8 @@ void		merger_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
 	}
 }
 
-void		split_stack(t_linklist *src, t_linklist *dst, int med, t_stack *stack)
+void		split_stack(t_linklist *src, t_linklist *dst, int med, \
+						t_stack *stack)
 {
 	while (is_substack(src->head, med) && !issort(src) && src->size > 3)
 	{

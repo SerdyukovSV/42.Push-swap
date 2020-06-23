@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/23 15:53:09 by gartanis          #+#    #+#             */
+/*   Updated: 2020/06/23 15:55:09 by gartanis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static void	print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
@@ -6,11 +18,12 @@ static void	print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
 
 	!count ? (count = 0) : 0;
 	system("clear");
-	ft_printf("Operation : \033[33;1m%s\033[m\nCounter   : %d\n", opt ? opt : "", count++);
+	ft_printf("Operation : \033[33;1m%s\033[m\nCounter   : %d\n", \
+				opt ? opt : "", count++);
 	ft_printf("  Stack A   Stack B\n");
 	while (src || dst)
 	{
-		src ? ft_printf("%9d |",src->data) : ft_printf("          |");
+		src ? ft_printf("%9d |", src->data) : ft_printf("          |");
 		dst ? ft_printf("%2d", dst->data) : ft_printf("  ");
 		src ? (src = src->next) : 0;
 		dst ? (dst = dst->next) : 0;
@@ -18,7 +31,8 @@ static void	print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
 	}
 }
 
-static void	do_operation(t_linklist *src, t_linklist *dst, t_stack *stack, char *opt)
+static void	do_operation(t_linklist *src, t_linklist *dst, t_stack *stack, \
+						char *opt)
 {
 	!ft_strcmp("pb", opt) ? push(src, dst, stack) : 0;
 	!ft_strcmp("pa", opt) ? push(dst, src, stack) : 0;

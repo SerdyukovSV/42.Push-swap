@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_arg.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/23 15:56:58 by gartanis          #+#    #+#             */
+/*   Updated: 2020/06/23 15:57:54 by gartanis         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/push_swap.h"
 
 static int	get_options(t_stack *stack, char *str)
@@ -33,7 +45,7 @@ char		**get_arg(t_stack *stack, int ac, char *av[])
 	k = 0;
 	stack->opt = 0;
 	if (!(str = (char **)malloc(sizeof(char *) * ac)))
-		exit (1);
+		exit(1);
 	while (av[i])
 	{
 		if (get_options(stack, av[i]))
