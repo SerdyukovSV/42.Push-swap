@@ -90,5 +90,6 @@ int					init_stack(t_stack *stack, char *av[], int ac)
 	i = -1;
 	while (str[++i])
 		free(str[i]);
+	free(str);
 	return (ret);
 }
