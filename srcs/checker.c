@@ -14,7 +14,6 @@
 
 static int valid_operation(char *s, int (*f)(const char *, const char *))
 {
-	printf("%s\n", s);
 	if (!f(s, "pa") || !f(s, "pb") || !f(s, "sa") || !f(s, "sb") ||
 		!f(s, "ra") || !f(s, "rb") || !f(s, "rra") || !f(s, "rrb") ||
 		!f(s, "ss") || !f(s, "rr") || !f(s, "rrr"))
