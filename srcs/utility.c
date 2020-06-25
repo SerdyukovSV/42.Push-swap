@@ -12,20 +12,20 @@
 
 #include "../includes/push_swap.h"
 
-int		print_error(t_stack stack, int errcode)
+int		print_error(t_stack *stack, int errcode)
 {
 	if (errcode & NOARG)
-		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, NOARG_MS);
+		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack->prg, ERR_M, NOARG_MS);
 	if (errcode & EOVERFLOW)
-		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, \
+		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack->prg, ERR_M, \
 					EOVERFLOW_MS);
 	if (errcode & DUBLICATE)
-		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, \
+		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack->prg, ERR_M, \
 					DUBLICATE_MS);
 	if (errcode & ARGNOINT)
-		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack.prg, ERR_M, \
+		ft_printf("\033[39;1m%s:\033[0m %s %s\n", stack->prg, ERR_M, \
 					ARGNOINT_MS);
-	if (errcode == -1)
+	if (errcode & ERR)
 		ft_printf("Error\n");
 	return (0);
 }
@@ -34,9 +34,12 @@ void	print_operation(t_stack *stack, const char *str, const char let)
 {
 	if (stack->print)
 	{
-		ft_putstr(str);
-		let ? ft_putchar(let) : 0;
-		ft_putchar('\n');
+		if (!(stack->opt & OPT_F))
+		{
+			ft_putstr(str);
+			let ? ft_putchar(let) : 0;
+			ft_putchar('\n');
+		}
 		if (stack->opt & OPT_F)
 		{
 			ft_putstr_fd(str, stack->fd);

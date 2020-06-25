@@ -12,6 +12,16 @@
 
 #include "../includes/push_swap.h"
 
+static int valid_operation(char *s, int (*f)(const char *, const char *))
+{
+	printf("%s\n", s);
+	if (!f(s, "pa") || !f(s, "pb") || !f(s, "sa") || !f(s, "sb") ||
+		!f(s, "ra") || !f(s, "rb") || !f(s, "rra") || !f(s, "rrb") ||
+		!f(s, "ss") || !f(s, "rr") || !f(s, "rrr"))
+		return (1);
+	return (0);
+}
+
 static void	print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
 {
 	static int count;
@@ -49,24 +59,25 @@ static void	do_operation(t_linklist *src, t_linklist *dst, t_stack *stack, \
 
 static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
-	char	*opt;
-	int		ret;
+	char	*oper;
 
 	if (stack->opt & OPT_F)
 		stack->fd = open(OUTPUT_PS, O_RDONLY);
-	while ((ret = get_next_line(stack->fd, &opt)) > 0)
+	while (get_next_line(stack->fd, &oper) > 0)
 	{
+		if (!valid_operation(oper, ft_strcmp))
+			return (print_error(stack, ERR));
 		if (stack->opt & OPT_V)
 		{
-			print_stack(src->head, dst->head, opt, stack);
+			print_stack(src->head, dst->head, oper, stack);
 			system("sleep 0.05");
 		}
-		do_operation(src, dst, stack, opt);
-		free(opt);
+		do_operation(src, dst, stack, oper);
+		free(oper);
 	}
 	if (stack->opt & OPT_V)
 		print_stack(src->head, dst->head, NULL, stack);
-	return (ret);
+	return (1);
 }
 
 int			main(int ac, char **av)
@@ -78,11 +89,12 @@ int			main(int ac, char **av)
 	stack.print = 0;
 	stack.fd = 0;
 	if (ac < 2)
-		return (print_error(stack, -1));
+		return (0);
 	av += 1;
 	if ((ret = init_stack(&stack, av, ac)))
-		return (print_error(stack, -1));
+		return (print_error(&stack, ERR));
 	ret = get_operations(stack.stack[0], stack.stack[1], &stack);
-	ft_printf("%s\n", issort(stack.stack[0]) ? OK : KO);
+	if (ret)
+		ft_printf("%s\n", issort(stack.stack[0]) ? OK : KO);
 	return (0);
 }

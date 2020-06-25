@@ -62,7 +62,7 @@ int			init_stack(t_stack *stack, char *av[], int ac)
 	int		i;
 
 	str = get_arg(stack, ac, av);
-	if (!*str)
+	if (!str[0])
 		return (NOARG);
 	if ((ret = check_stack(str)))
 		return (ret);

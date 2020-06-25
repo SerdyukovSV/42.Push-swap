@@ -22,6 +22,7 @@
 # define EOVERFLOW		(1 << 1)
 # define DUBLICATE		(1 << 2)
 # define ARGNOINT		(1 << 3)
+# define ERR			(1 << 4)
 
 # define ERR_M			"\033[31;1merror:\033[00m"
 # define NOARG_MS		"\033[39;1mmissing arguments\033[0m"
@@ -68,7 +69,7 @@ int					get_median(t_linklist *stack, int div);
 int					is_substack(t_node *list, int med);
 int					issort(t_linklist *stack);
 
-int					print_error(t_stack stack, int errcode);
+int					print_error(t_stack *stack, int errcode);
 void				print_operation(t_stack *stack, const char *str, \
 									const char let);
 
