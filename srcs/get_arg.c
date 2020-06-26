@@ -43,17 +43,17 @@ char		**get_arg(t_stack *stack, int ac, char *av[])
 
 	i = -1;
 	k = 0;
-	stack->opt = 0;
 	if (!(str = (char **)malloc(sizeof(char *) * ac)))
 		exit(1);
 	while (av[++i])
 	{
-		if (get_options(stack, av[i]))
-			continue;
-		else
+		if (!get_options(stack, av[i]))
 		{
 			if (ft_strchr(av[i], ' '))
+			{
+				free(str);
 				str = ft_strsplit(av[i], ' ');
+			}
 			else
 			{
 				str[k++] = ft_strdup((const char *)av[i]);

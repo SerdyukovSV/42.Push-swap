@@ -64,6 +64,7 @@ typedef struct		s_stack
 int					init_stack(t_stack *stack, char *av[], int ac);
 char				**get_arg(t_stack *stack, int ac, char *av[]);
 int					check_stack(char **str);
+void				free_stack(t_stack *stack);
 
 int					get_median(t_linklist *stack, int div);
 int					is_substack(t_node *list, int med);

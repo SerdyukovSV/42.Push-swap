@@ -58,21 +58,21 @@ static void	do_operation(t_linklist *src, t_linklist *dst, t_stack *stack, \
 
 static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
-	char	*oper;
+	char	*opr;
 
 	if (stack->opt & OPT_F)
 		stack->fd = open(OUTPUT_PS, O_RDONLY);
-	while (get_next_line(stack->fd, &oper) > 0)
+	while (get_next_line(stack->fd, &opr) > 0)
 	{
-		if (!valid_operation(oper, ft_strcmp))
+		if (!valid_operation(opr, ft_strcmp))
 			return (print_error(stack, ERR));
 		if (stack->opt & OPT_V)
 		{
-			print_stack(src->head, dst->head, oper, stack);
+			print_stack(src->head, dst->head, opr, stack);
 			system("sleep 0.05");
 		}
-		do_operation(src, dst, stack, oper);
-		free(oper);
+		do_operation(src, dst, stack, opr);
+		free(opr);
 	}
 	if (stack->opt & OPT_V)
 		print_stack(src->head, dst->head, NULL, stack);
@@ -96,5 +96,6 @@ int			main(int ac, char **av)
 	if (ret)
 		ft_printf("%s\n", (issort(stack.stack[0]) && \
 				!stack.stack[1]->head) ? OK : KO);
+	free_stack(&stack);
 	return (0);
 }

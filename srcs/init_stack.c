@@ -6,13 +6,32 @@
 /*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 15:58:24 by gartanis          #+#    #+#             */
-/*   Updated: 2020/06/23 16:00:03 by gartanis         ###   ########.fr       */
+/*   Updated: 2020/06/26 18:17:42 by gartanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void		ft_push_bot(t_linklist *list, int data)
+void				free_stack(t_stack *stack)
+{
+	t_linklist	*tmp;
+	int			i;
+
+	i = 0;
+	while (i < 2)
+	{
+		tmp = stack->stack[i];
+		while (tmp->head)
+		{
+			free(tmp->head);
+			tmp->head = tmp->head->next;
+		}
+		free(tmp);
+		i++;
+	}
+}
+
+static void			ft_push_bot(t_linklist *list, int data)
 {
 	t_node *tmp;
 
@@ -29,7 +48,7 @@ void		ft_push_bot(t_linklist *list, int data)
 	list->size += 1;
 }
 
-t_linklist	*creat_linkedlist(char lett)
+static t_linklist	*creat_linkedlist(char lett)
 {
 	t_linklist *tmp;
 
@@ -42,7 +61,7 @@ t_linklist	*creat_linkedlist(char lett)
 	return (tmp);
 }
 
-void		creat_stack(t_stack *stack, char **str)
+static void			creat_stack(t_stack *stack, char **str)
 {
 	if (!(stack->stack[0] = creat_linkedlist('a')))
 		exit(1);
@@ -55,17 +74,21 @@ void		creat_stack(t_stack *stack, char **str)
 	}
 }
 
-int			init_stack(t_stack *stack, char *av[], int ac)
+int					init_stack(t_stack *stack, char *av[], int ac)
 {
 	char	**str;
 	int		ret;
 	int		i;
 
+	stack->opt = 0;
 	str = get_arg(stack, ac, av);
 	if (!str[0])
 		return (NOARG);
 	if ((ret = check_stack(str)))
 		return (ret);
 	creat_stack(stack, str);
+	i = -1;
+	while (str[++i])
+		free(str[i]);
 	return (ret);
 }
