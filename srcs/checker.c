@@ -12,7 +12,7 @@
 
 #include "../includes/push_swap.h"
 
-static int valid_operation(char *s, int (*f)(const char *, const char *))
+static int	valid_operation(char *s, int (*f)(const char *, const char *))
 {
 	if (!f(s, "pa") || !f(s, "pb") || !f(s, "sa") || !f(s, "sb") ||
 		!f(s, "ra") || !f(s, "rb") || !f(s, "rra") || !f(s, "rrb") ||
@@ -94,6 +94,7 @@ int			main(int ac, char **av)
 		return (print_error(&stack, ERR));
 	ret = get_operations(stack.stack[0], stack.stack[1], &stack);
 	if (ret)
-		ft_printf("%s\n", issort(stack.stack[0]) ? OK : KO);
+		ft_printf("%s\n", (issort(stack.stack[0]) && \
+				!stack.stack[1]->head) ? OK : KO);
 	return (0);
 }

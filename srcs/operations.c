@@ -16,41 +16,52 @@ void	revrotate(t_linklist *list, t_stack *stack)
 {
 	t_node *tmp;
 
-	tmp = list->tail;
-	tmp->next = list->head;
-	list->head->prev = tmp;
-	list->head = tmp;
-	list->tail = list->tail->prev;
-	list->tail->next = NULL;
-	list->head->prev = NULL;
-	print_operation(stack, "rr", list->letter);
+	if (list->head && list->tail)
+	{
+		tmp = list->tail;
+		tmp->next = list->head;
+		list->head->prev = tmp;
+		list->head = tmp;
+		list->tail = list->tail->prev;
+		list->tail->next = NULL;
+		list->head->prev = NULL;
+		print_operation(stack, "rr", list->letter);
+	}
 }
 
 void	rotate(t_linklist *list, t_stack *stack)
 {
-	list->tail->next = list->head;
-	list->head->prev = list->tail;
-	list->tail = list->head;
-	list->head = list->head->next;
-	list->head->prev = NULL;
-	list->tail->next = NULL;
-	print_operation(stack, "r", list->letter);
+	if (list->head && list->tail)
+	{
+		list->tail->next = list->head;
+		list->head->prev = list->tail;
+		list->tail = list->head;
+		list->head = list->head->next;
+		list->head->prev = NULL;
+		list->tail->next = NULL;
+		print_operation(stack, "r", list->letter);
+	}
 }
 
 void	swap(t_linklist *list, t_stack *stack)
 {
 	int tmp;
 
-	tmp = list->head->data;
-	list->head->data = list->head->next->data;
-	list->head->next->data = tmp;
-	print_operation(stack, "s", list->letter);
+	if (list->head && list->head->next)
+	{
+		tmp = list->head->data;
+		list->head->data = list->head->next->data;
+		list->head->next->data = tmp;
+		print_operation(stack, "s", list->letter);
+	}
 }
 
 void	push(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
 	t_node *tmp;
 
+	if (!src)
+		return ;
 	tmp = src->head;
 	if (src->head->next)
 	{

@@ -58,9 +58,11 @@ static int	istypeint(char **str)
 		k = -1;
 		while (str[i][++k])
 		{
+			if (str[i][k] == '-')
+				if (ft_isdigit(str[i][k + 1]))
+					continue;
 			if (!ft_isdigit(str[i][k]))
-				if (str[i][k] != '-')
-					return (ARGNOINT);
+				return (ARGNOINT);
 		}
 	}
 	return (0);
