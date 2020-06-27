@@ -6,7 +6,7 @@
 /*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 15:58:24 by gartanis          #+#    #+#             */
-/*   Updated: 2020/06/26 18:17:42 by gartanis         ###   ########.fr       */
+/*   Updated: 2020/06/27 17:53:58 by gartanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void				free_stack(t_stack *stack)
 	}
 }
 
-static void			ft_push_bot(t_linklist *list, int data)
+static void			ft_push(t_linklist *list, int data)
 {
 	t_node *tmp;
 
@@ -53,7 +53,7 @@ static t_linklist	*creat_linkedlist(char lett)
 	t_linklist *tmp;
 
 	if (!(tmp = (t_linklist*)malloc(sizeof(t_linklist))))
-		return (NULL);
+		exit(1);
 	tmp->size = 0;
 	tmp->letter = lett;
 	tmp->head = NULL;
@@ -63,13 +63,11 @@ static t_linklist	*creat_linkedlist(char lett)
 
 static void			creat_stack(t_stack *stack, char **str)
 {
-	if (!(stack->stack[0] = creat_linkedlist('a')))
-		exit(1);
-	if (!(stack->stack[1] = creat_linkedlist('b')))
-		exit(1);
+	stack->stack[0] = creat_linkedlist('a');
+	stack->stack[1] = creat_linkedlist('b');
 	while (*str)
 	{
-		ft_push_bot(stack->stack[0], ft_atoi(*str));
+		ft_push(stack->stack[0], ft_atoi(*str));
 		str += 1;
 	}
 }
