@@ -14,8 +14,7 @@ TARGETA	:= push_swap
 TARGETB := checker
 CFLAGS 	:= -Wall -Werror -Wextra
 CC		:= gcc
-LIB_H	:= libft/includes/*.h
-LIB_C	:= libft/*.c
+LIBFT	:= libft/*.c libft/pft/*.c libft/includes/*.h
 SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/sort.c srcs/operations.c srcs/operations2.c srcs/get_arg.c srcs/utility.c
 SRC_PW	:= srcs/push_swap.c
 SRC_CH	:= srcs/checker.c
@@ -23,24 +22,23 @@ OBJF 	:= $(addprefix obj/, $(notdir $(SRCF:.c=.o)))
 OBJ_PW	:= $(addprefix obj/, $(notdir $(SRC_PW:.c=.o)))
 OBJ_CH	:= $(addprefix obj/, $(notdir $(SRC_CH:.c=.o)))
 INC		:= includes/push_swap.h
-OBJDIR	:= obj
 
 YELLOW 	:= \033[33;1m
 GREEN 	:= \033[32;1m
 WHITE	:= \033[39;1m
-EOC	:= \033[00m
+EOC		:= \033[00m
 
 all: $(TARGETA) $(TARGETB)
 
-$(TARGETA): $(OBJF) $(OBJ_PW) $(LIB_C)
+$(TARGETA): $(OBJF) $(OBJ_PW)
 	@$(CC) $^ -o $@ libft/libft.a
 	@echo "$(WHITE)$(TARGETA)$(EOC) $(GREEN)compiling completed$(EOC)"
 
-$(TARGETB): $(OBJF) $(OBJ_CH) $(LIB_C)
+$(TARGETB): $(OBJF) $(OBJ_CH)
 	@$(CC) $^ -o $@ libft/libft.a
 	@echo "$(WHITE)$(TARGETB)$(EOC) $(GREEN)  compiling completed$(EOC)"
 
-$(OBJF) $(OBJ_PW) $(OBJ_CH): $(SRCF) $(SRC_PW) $(SRC_CH) $(INC) $(LIB_C)
+$(OBJF) $(OBJ_PW) $(OBJ_CH): $(SRCF) $(SRC_PW) $(SRC_CH) $(INC) $(LIBFT)
 	@cd libft/ && make
 	@printf " Compiling [.:]\r"
 	@$(CC) -c -I $(INC) $^

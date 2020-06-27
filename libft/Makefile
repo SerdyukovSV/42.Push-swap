@@ -19,19 +19,9 @@ FILES		= 	ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_memchr.c ft_memcmp.
 				ft_strsub.c ft_strjoin.c ft_strtrim.c ft_strsplit.c ft_itoa.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr_fd.c ft_putnbr.c ft_putchar_fd.c \
 				ft_putstr_fd.c ft_putendl_fd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c ft_iscntrl.c ft_isgraph.c ft_isblank.c \
 				ft_islower.c ft_isupper.c get_next_line.c ft_strrev.c ft_dectostr.c ft_strchrpos.c ft_power.c \
-				srcs/ft_printf.c \
-				srcs/parse_specifier.c		\
-				srcs/get_param.c			\
-				srcs/print_txt.c			\
-				srcs/print_hexadecimal.c	\
-				srcs/print_nbr.c			\
-				srcs/signed_nbr.c			\
-				srcs/unsigned_nbr.c			\
-				srcs/print_octal.c			\
-				srcs/print_float.c			\
-				srcs/util_fl/convers_fl.c	\
-				srcs/util_fl/match_fl.c
-OBJ		= $(notdir $(FILES:.c=.o))
+				pft/ft_printf.c pft/parse_specifier.c pft/get_param.c pft/print_txt.c pft/print_hexadecimal.c pft/print_nbr.c pft/signed_nbr.c pft/unsigned_nbr.c \
+				pft/print_octal.c pft/print_float.c pft/util_fl/convers_fl.c pft/util_fl/match_fl.c
+OBJ		= $(addprefix obj/, $(notdir $(FILES:.c=.o)))
 
 YELLOW 	:= \033[33;1m
 GREEN 	:= \033[32;1m
@@ -49,9 +39,10 @@ $(OBJ): $(FILES)
 	@printf " Compiling [.:]\r"
 	@gcc -c $(CFLAGS) -I includes/ $^
 	@printf " Compiling [:.]\r"
+	@mkdir -p obj && mv *.o obj/
 
 clean:
-	@rm -f $(OBJ) includes/libft.h.gch
+	@rm -rf $(OBJ) obj includes/libft.h.gch
 
 fclean: clean
 	@rm -f $(NAME)
