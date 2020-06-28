@@ -15,7 +15,7 @@ TARGETB := checker
 CFLAGS 	:= -c -Wall -Werror -Wextra
 CC		:= gcc
 LIBFT	:= libft/*.c libft/pft/*.c libft/includes/*.h
-SRCF 	:= srcs/check_stack.c srcs/init_stack.c srcs/sort.c srcs/operations.c srcs/operations2.c srcs/get_arg.c srcs/utility.c
+SRCF 	:= srcs/valid_stack.c srcs/init_stack.c srcs/sort.c srcs/operations.c srcs/operations2.c srcs/get_arg.c srcs/utility.c
 SRC_PW	:= srcs/push_swap.c
 SRC_CH	:= srcs/checker.c
 OBJF 	:= $(addprefix obj/, $(notdir $(SRCF:.c=.o)))
