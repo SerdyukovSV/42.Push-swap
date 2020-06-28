@@ -21,7 +21,7 @@ static int	valid_operation(char *s, int (*f)(const char *, const char *))
 	return (0);
 }
 
-static void	print_stack(t_node *src, t_node *dst, char *opt, t_stack *stack)
+static void	print_stack(t_node *src, t_node *dst, char *opt)
 {
 	static int count;
 
@@ -68,14 +68,14 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 			return (print_error(stack, ERR));
 		if (stack->opt & OPT_V)
 		{
-			print_stack(src->head, dst->head, opr, stack);
+			print_stack(src->head, dst->head, opr);
 			system("sleep 0.05");
 		}
 		do_operation(src, dst, stack, opr);
 		free(opr);
 	}
 	if (stack->opt & OPT_V)
-		print_stack(src->head, dst->head, NULL, stack);
+		print_stack(src->head, dst->head, NULL);
 	return (1);
 }
 
