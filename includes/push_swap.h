@@ -67,7 +67,7 @@ int					check_stack(char **str);
 void				free_stack(t_stack *stack);
 
 int					get_median(t_linklist *stack, int div);
-int					is_substack(t_node *list, int med);
+int					is_substack(t_node *head, int med);
 int					issort(t_linklist *stack);
 
 int					print_error(t_stack *stack, int errcode);
@@ -80,8 +80,7 @@ void				quick_sort(t_linklist *src, t_linklist *dst, \
 								t_stack *stack);
 void				merger_stack(t_linklist *src, t_linklist *dst, \
 								t_stack *stack);
-void				split_stack(t_linklist *src, t_linklist *dst, int med, \
-								t_stack *stack);
+void				split_stack(t_linklist *src, t_linklist *dst, t_stack *stack);
 
 void				rotate(t_linklist *list, t_stack *stack);
 void				doub_rotate(t_linklist *src, t_linklist *dst, \

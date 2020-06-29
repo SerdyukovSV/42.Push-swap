@@ -69,7 +69,7 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 		if (stack->opt & OPT_V)
 		{
 			print_stack(src->head, dst->head, opr);
-			system("sleep 0.05");
+			system("sleep 0.5");
 		}
 		do_operation(src, dst, stack, opr);
 		free(opr);

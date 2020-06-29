@@ -51,6 +51,7 @@ void	print_operation(t_stack *stack, const char *str, const char let)
 
 int		get_median(t_linklist *stack, int div)
 {
+	// printf("get_median\n");
 	t_node	*list;
 	int		max;
 	int		min;
@@ -69,20 +70,26 @@ int		get_median(t_linklist *stack, int div)
 		if ((ret = (max + min) / div) <= min)
 			return (get_median(stack, div - 1));
 		else
+		{
+			// printf("med = %d\n", ret);
 			return (ret);
+		}
 	else
 		ret = (max + min) / 2;
+	// printf("med = %d\n", ret);
 	return (ret);
 }
 
-int		is_substack(t_node *list, int med)
+int		is_substack(t_node *head, int med)
 {
-	while (list)
+	while (head)
 	{
-		if (list->data < med)
+		if (head->data < med)
+		{
+			// printf("issteck = %d\n", head->data);
 			return (1);
-		else
-			list = list->next;
+		}
+		head = head->next;
 	}
 	return (0);
 }

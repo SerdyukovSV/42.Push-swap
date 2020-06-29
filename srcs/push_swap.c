@@ -14,11 +14,11 @@
 
 void	quick_sort(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
-	stack->div = 4;
+	stack->div = 2;
 	if (!issort(src))
 	{
 		if (src->size > 3)
-			split_stack(src, dst, get_median(src, stack->div), stack);
+			split_stack(src, dst, stack);
 		else
 			small_sort(src, stack);
 		quick_sort(src, dst, stack);
