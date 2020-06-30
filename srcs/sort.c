@@ -74,8 +74,7 @@ void		merger_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
 	med = get_median(dst, stack->div);
 	while (is_substack(dst->head, med) && issort(src) && dst->size > 0)
 	{
-		// printf("loop\n");
-		if (dst->head->data > med /* || dst->size < 3 */)
+		if (dst->head->data > med)
 				push(dst, src, stack);
 		else
 		{
@@ -104,5 +103,4 @@ void		split_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
 				rotate_stack(src, dst, med, stack);
 		}
 	}
-	// printf("out\n");
 }

@@ -12,25 +12,21 @@
 
 #include "../includes/push_swap.h"
 
-void	quick_sort(t_linklist *src, t_linklist *dst, t_stack *stack)
+void	mini_sort(t_linklist *lst, t_stack *stack)
 {
-	stack->div = 2;
-	if (!issort(src))
+	if (!issort(lst))
 	{
-		if (src->size > 3)
-			split_stack(src, dst, stack);
+		if (lst->head->data > lst->head->next->data)
+			swap(lst, stack);
+		else if (lst->head->next->data > lst->tail->data)
+			revrotate(lst, stack);
 		else
-			small_sort(src, stack);
-		quick_sort(src, dst, stack);
-	}
-	else if (dst->size > 0)
-	{
-		merger_stack(src, dst, stack);
-		quick_sort(src, dst, stack);
+			rotate(lst, stack);
+		mini_sort(lst, stack);
 	}
 }
 
-void	small_sort(t_linklist *list, t_stack *stack)
+void	small_sort(t_linklist *lst, t_stack *stack)
 {
 	if (!issort(list))
 	{
@@ -47,9 +43,29 @@ void	small_sort(t_linklist *list, t_stack *stack)
 	}
 }
 
+void	quick_sort(t_linklist *src, t_linklist *dst, t_stack *stack)
+{
+	stack->div = 2;
+	if (!issort(src))
+	{
+		if (src->size > 3)
+			split_stack(src, dst, stack);
+		else
+			small_sort(src, stack);
+		quick_sort(src, dst, stack);
+	}
+	// else if (dst->size > 0)
+	// {
+		// merger_stack(src, dst, stack);
+		// quick_sort(src, dst, stack);
+	// }
+}
+
 void	sort_stack(t_stack *stack)
 {
 	if (stack->stack[0]->size <= 3)
+		small_sort(stack->stack[0], stack);
+	else if (stack->stack[0]->size <= 6)
 		small_sort(stack->stack[0], stack);
 	else
 		quick_sort(stack->stack[0], stack->stack[1], stack);
@@ -74,3 +90,10 @@ int		main(int ac, char *av[])
 	free_stack(&stack);
 	return (ret);
 }
+
+// 1
+// 2
+// 3
+// 4
+// 5
+// 6

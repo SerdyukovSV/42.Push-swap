@@ -48,14 +48,14 @@ static void			ft_push(t_linklist *list, int data)
 	list->size += 1;
 }
 
-static t_linklist	*creat_linkedlist(char lett)
+t_linklist			*creat_linkedlist(char stack)
 {
 	t_linklist *tmp;
 
 	if (!(tmp = (t_linklist*)malloc(sizeof(t_linklist))))
 		exit(1);
 	tmp->size = 0;
-	tmp->letter = lett;
+	tmp->letter = stack;
 	tmp->head = NULL;
 	tmp->tail = NULL;
 	return (tmp);
@@ -70,6 +70,13 @@ static void			creat_stack(t_stack *stack, char **str)
 		ft_push(stack->stack[0], ft_atoi(*str));
 		str += 1;
 	}
+	if (!(stack->sub = (t_substeck *)malloc(sizeof(t_substeck))))
+		exit(1);
+	if (!(stack->sub->stack = (t_linklist **)malloc(sizeof(t_linklist *) * 1)))
+		exit(1);
+	stack->sub->stack[0] = creat_linkedlist(0);
+	stack->sub->total = 1;
+	stack->sub->size = 0;
 }
 
 int					init_stack(t_stack *stack, char *av[], int ac)

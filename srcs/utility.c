@@ -84,11 +84,8 @@ int		is_substack(t_node *head, int med)
 {
 	while (head)
 	{
-		if (head->data < med)
-		{
-			// printf("issteck = %d\n", head->data);
+		if (head->data <= med)
 			return (1);
-		}
 		head = head->next;
 	}
 	return (0);

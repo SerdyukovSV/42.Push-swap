@@ -21,25 +21,6 @@ static int	valid_operation(char *s, int (*f)(const char *, const char *))
 	return (0);
 }
 
-static void	print_stack(t_node *src, t_node *dst, char *opt)
-{
-	static int count;
-
-	!count ? (count = 0) : 0;
-	system("clear");
-	ft_printf("Operation : \033[33;1m%s\033[m\nCounter   : %d\n", \
-				opt ? opt : "", count++);
-	ft_printf("  Stack A   Stack B\n");
-	while (src || dst)
-	{
-		src ? ft_printf("%9d |", src->data) : ft_printf("          |");
-		dst ? ft_printf("%2d", dst->data) : ft_printf("  ");
-		src ? (src = src->next) : 0;
-		dst ? (dst = dst->next) : 0;
-		ft_printf("\n");
-	}
-}
-
 static void	do_operation(t_linklist *src, t_linklist *dst, t_stack *stack, \
 						char *opt)
 {
@@ -68,19 +49,20 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 			return (print_error(stack, ERR));
 		if (stack->opt & OPT_V)
 		{
-			print_stack(src->head, dst->head, opr);
-			system("sleep 0.5");
+			print_stack(src->head, dst->head, opr, stack->deb_mode);
+			system("sleep 0.05");
 		}
 		do_operation(src, dst, stack, opr);
 		free(opr);
 	}
 	if (stack->opt & OPT_V)
-		print_stack(src->head, dst->head, NULL);
+		print_stack(src->head, dst->head, NULL, stack->deb_mode);
 	return (1);
 }
 
 int			main(int ac, char **av)
 {
+	ft_printf("checker\n");
 	t_stack	stack;
 	int		ret;
 
@@ -92,6 +74,7 @@ int			main(int ac, char **av)
 	av += 1;
 	if ((ret = init_stack(&stack, av, ac)))
 		return (print_error(&stack, ERR));
+	stack.deb_mode = debugging_mode(&stack);
 	ret = get_operations(stack.stack[0], stack.stack[1], &stack);
 	if (ret)
 		ft_printf("%s\n", (issort(stack.stack[0]) && \
