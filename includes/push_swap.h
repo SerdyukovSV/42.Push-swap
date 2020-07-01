@@ -16,7 +16,7 @@
 # include "../libft/includes/libft.h"
 // # include <stdio.h>
 
-# define OUTPUT_PS "OPERATIONS.txt"
+# define OUTPUT_PS		"OPERATIONS.txt"
 
 # define NOARG			(1 << 0)
 # define EOVERFLOW		(1 << 1)
@@ -38,6 +38,9 @@
 # define OPT_C			(1 << 1)
 # define OPT_F			(1 << 2)
 
+# define STK_A		(0)
+# define STK_B		(1)
+
 typedef struct		s_node
 {
 	struct s_node	*next;
@@ -53,13 +56,6 @@ typedef struct		s_linklist
 	char			letter;
 }					t_linklist;
 
-typedef struct		s_substeck
-{
-	t_linklist		**stack;
-	int				size;
-	int				total;
-}					t_substeck;
-
 typedef struct		s_stack
 {
 	char			*prg;
@@ -68,8 +64,10 @@ typedef struct		s_stack
 	int				fd;
 	int				print;
 	int				deb_mode;
+	int				push[2][64];
+	int				num_a;
+	int				num_b;
 	t_linklist		*stack[2];
-	t_substeck		*sub;
 }					t_stack;
 
 int					init_stack(t_stack *stack, char *av[], int ac);
@@ -78,8 +76,8 @@ t_linklist			*creat_linkedlist(char stack);
 int					check_stack(char **str);
 void				free_stack(t_stack *stack);
 
-int					get_median(t_linklist *stack, int div);
-int					is_substack(t_node *head, int med);
+int					get_median(t_stack *stack, int stk, int num);
+int					is_substack(t_stack *stack, int med, int s);
 int					issort(t_linklist *stack);
 
 int					print_error(t_stack *stack, int errcode);
@@ -87,15 +85,20 @@ void				print_operation(t_stack *stack, const char *str, \
 									const char let);
 int					debugging_mode(t_stack *stack);
 void				print_stack(t_node *src, t_node *dst, char *opt, int dmode);
-t_linklist			**realloc_substack(t_substeck *substack, int size);
+// t_linklist			**realloc_substack(t_substeck *substack, int size);
 
-void				sort_stack(t_stack *stack);
+void				sort_stack(t_stack *stack, int ind);
+void				mini_sort(t_linklist *lst, t_stack *stack);
 void				small_sort(t_linklist *list, t_stack *stack);
 void				quick_sort(t_linklist *src, t_linklist *dst, \
 								t_stack *stack);
 void				merger_stack(t_linklist *src, t_linklist *dst, \
 								t_stack *stack);
 void				split_stack(t_linklist *src, t_linklist *dst, t_stack *stack);
+
+/*
+**
+*/
 
 void				rotate(t_linklist *list, t_stack *stack);
 void				doub_rotate(t_linklist *src, t_linklist *dst, \

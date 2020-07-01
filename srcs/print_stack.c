@@ -1,21 +1,5 @@
 #include "../includes/push_swap.h"
 
-t_linklist **realloc_substack(t_substeck *substack, int size)
-{
-    t_linklist  **tmp;
-    int         i;
-
-    if (!(tmp = (t_linklist **)malloc(sizeof(t_linklist *) * size + 1)))
-        exit(1);
-    i = -1;
-    while (++i < size)
-        tmp[i] = substack->stack[i];
-    tmp[i] = creat_linkedlist(0);
-    substack->total++;
-    free(substack->stack);
-    return (tmp);
-}
-
 int     debugging_mode(t_stack *stack)
 {
     char    *line;

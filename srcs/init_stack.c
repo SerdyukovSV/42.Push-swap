@@ -70,13 +70,11 @@ static void			creat_stack(t_stack *stack, char **str)
 		ft_push(stack->stack[0], ft_atoi(*str));
 		str += 1;
 	}
-	if (!(stack->sub = (t_substeck *)malloc(sizeof(t_substeck))))
-		exit(1);
-	if (!(stack->sub->stack = (t_linklist **)malloc(sizeof(t_linklist *) * 1)))
-		exit(1);
-	stack->sub->stack[0] = creat_linkedlist(0);
-	stack->sub->total = 1;
-	stack->sub->size = 0;
+	stack->num_a = 0;
+	stack->num_b = 0;
+	ft_bzero(stack->push[STK_A], 64);
+	ft_bzero(stack->push[STK_B], 64);
+	stack->push[STK_A][0] = stack->stack[STK_A]->size;
 }
 
 int					init_stack(t_stack *stack, char *av[], int ac)

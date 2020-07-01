@@ -49,44 +49,57 @@ void	print_operation(t_stack *stack, const char *str, const char let)
 	}
 }
 
-int		get_median(t_linklist *stack, int div)
+int		get_median(t_stack *stack, int stk, int num)
 {
-	// printf("get_median\n");
-	t_node	*list;
+	t_node	*lst;
 	int		max;
 	int		min;
-	int		ret;
+	int		i;
 
-	list = stack->head;
-	max = list->data;
-	min = list->data;
-	while (list)
+	lst = stack->stack[stk]->head;
+	max = lst->data;
+	min = lst->data;
+	i = -1;
+	while (++i < stack->push[stk][num])
 	{
-		(max < list->data) ? max = list->data : 0;
-		(min > list->data) ? min = list->data : 0;
-		list = list->next;
+		(max < lst->data) ? max = lst->data : 0;
+		(min > lst->data) ? min = lst->data : 0;
+		lst = lst->next;
 	}
-	if (stack->size > 20)
-		if ((ret = (max + min) / div) <= min)
-			return (get_median(stack, div - 1));
-		else
-		{
-			// printf("med = %d\n", ret);
-			return (ret);
-		}
-	else
-		ret = (max + min) / 2;
-	// printf("med = %d\n", ret);
-	return (ret);
+	if (max == min)
+		return (max / 2);
+	return ((max + min) / 2);
 }
 
-int		is_substack(t_node *head, int med)
+int		is_substack(t_stack *stack, int med, int s)
 {
-	while (head)
+	// printf("is_substack\n");
+	
+	int i;
+	t_node *tmp;
+
+	i = -1;
+	tmp = stack->stack[s]->head;
+	if (s == 0)
 	{
-		if (head->data <= med)
-			return (1);
-		head = head->next;
+		// printf("size_a = %d | push_size_a = %d\n", stack->stack[s]->size, stack->push[s][stack->num_a]);
+		while (++i < stack->push[s][stack->num_a])
+		{
+			if (tmp->data < med)
+				return (1);
+			tmp = tmp->next;
+		}
+	}
+	else
+	{
+		// printf("size_b = %d | push[%d] = %d\n", stack->stack[s]->size, stack->num_b, stack->push[s][stack->num_b]);
+		while (++i < stack->push[s][stack->num_b])
+		{
+			// printf("tmp->data = %d | med = %d\n", tmp->data, med);
+			if (tmp->data > med)
+				return (1);
+			tmp = tmp->next;
+		}
 	}
 	return (0);
 }
