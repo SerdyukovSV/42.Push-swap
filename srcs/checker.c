@@ -28,13 +28,13 @@ static void	do_operation(t_linklist *src, t_linklist *dst, t_stack *stack, \
 	!ft_strcmp("pa", opt) ? push(dst, src, stack) : 0;
 	!ft_strcmp("sa", opt) ? swap(src, stack) : 0;
 	!ft_strcmp("sb", opt) ? swap(dst, stack) : 0;
-	!ft_strcmp("ss", opt) ? doub_swap(src, dst, stack) : 0;
+	!ft_strcmp("ss", opt) ? doub_opt(stack, opt, swap) : 0;
 	!ft_strcmp("ra", opt) ? rotate(src, stack) : 0;
 	!ft_strcmp("rb", opt) ? rotate(dst, stack) : 0;
-	!ft_strcmp("rr", opt) ? doub_rotate(src, dst, stack) : 0;
+	!ft_strcmp("rr", opt) ? doub_opt(stack, opt, rotate) : 0;
 	!ft_strcmp("rra", opt) ? revrotate(src, stack) : 0;
 	!ft_strcmp("rrb", opt) ? revrotate(dst, stack) : 0;
-	!ft_strcmp("rrr", opt) ? doub_revrotate(src, dst, stack) : 0;
+	!ft_strcmp("rrr", opt) ? doub_opt(stack, opt, revrotate) : 0;
 }
 
 static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
@@ -50,7 +50,7 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 		if (stack->opt & OPT_V)
 		{
 			print_stack(src->head, dst->head, opr, stack->deb_mode);
-			system("sleep 0.5");
+			system("sleep 0.05");
 		}
 		do_operation(src, dst, stack, opr);
 		free(opr);
@@ -62,7 +62,6 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 
 int			main(int ac, char **av)
 {
-	ft_printf("checker\n");
 	t_stack	stack;
 	int		ret;
 

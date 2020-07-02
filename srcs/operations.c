@@ -12,47 +12,59 @@
 
 #include "../includes/push_swap.h"
 
-void	revrotate(t_linklist *list, t_stack *stack)
+void	doub_opt(t_stack *stack, char *op, void (*f)(t_linklist *, t_stack *))
+{
+	int i;
+
+	i = stack->print;
+	stack->print = 0;
+	f(stack->stack[STK_A], stack);
+	f(stack->stack[STK_B], stack);
+	stack->print = i;
+	print_operation(stack, op, 0);
+}
+
+void	revrotate(t_linklist *lst, t_stack *stack)
 {
 	t_node *tmp;
 
-	if (list->head && list->tail)
+	if (lst->head && lst->tail)
 	{
-		tmp = list->tail;
-		tmp->next = list->head;
-		list->head->prev = tmp;
-		list->head = tmp;
-		list->tail = list->tail->prev;
-		list->tail->next = NULL;
-		list->head->prev = NULL;
-		print_operation(stack, "rr", list->letter);
+		tmp = lst->tail;
+		tmp->next = lst->head;
+		lst->head->prev = tmp;
+		lst->head = tmp;
+		lst->tail = lst->tail->prev;
+		lst->tail->next = NULL;
+		lst->head->prev = NULL;
+		print_operation(stack, "rr", lst->letter);
 	}
 }
 
-void	rotate(t_linklist *list, t_stack *stack)
+void	rotate(t_linklist *lst, t_stack *stack)
 {
-	if (list->head && list->tail)
+	if (lst->head && lst->tail)
 	{
-		list->tail->next = list->head;
-		list->head->prev = list->tail;
-		list->tail = list->head;
-		list->head = list->head->next;
-		list->head->prev = NULL;
-		list->tail->next = NULL;
-		print_operation(stack, "r", list->letter);
+		lst->tail->next = lst->head;
+		lst->head->prev = lst->tail;
+		lst->tail = lst->head;
+		lst->head = lst->head->next;
+		lst->head->prev = NULL;
+		lst->tail->next = NULL;
+		print_operation(stack, "r", lst->letter);
 	}
 }
 
-void	swap(t_linklist *list, t_stack *stack)
+void	swap(t_linklist *lst, t_stack *stack)
 {
 	int tmp;
 
-	if (list->head && list->head->next)
+	if (lst->head && lst->head->next)
 	{
-		tmp = list->head->data;
-		list->head->data = list->head->next->data;
-		list->head->next->data = tmp;
-		print_operation(stack, "s", list->letter);
+		tmp = lst->head->data;
+		lst->head->data = lst->head->next->data;
+		lst->head->next->data = tmp;
+		print_operation(stack, "s", lst->letter);
 	}
 }
 
