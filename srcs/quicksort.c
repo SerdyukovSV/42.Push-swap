@@ -27,9 +27,9 @@ void		merger_stack(t_stack *stack, int med)
 			push(stack->stack[B], stack->stack[A], stack);
 			stack->push[A][stack->num_a]++;
 			stack->push[B][stack->num_b]--;
-			sub--;
 			if (stack->push[A][stack->num_a] <= 3)
 				mini_sort(stack->stack[A], stack);
+			sub--;
 		}
 		else if (++rot)
 			rotate(stack->stack[B], stack);

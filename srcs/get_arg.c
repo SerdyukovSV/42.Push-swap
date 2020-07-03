@@ -22,11 +22,11 @@ static int	get_options(t_stack *stack, char *str)
 		while (str && ft_strchr("vcf", *str))
 		{
 			ret = 1;
-			if (ft_strchr(str, 'v'))
+			if (*str == 'v')
 				stack->opt |= OPT_V;
-			else if (ft_strchr(str, 'c'))
+			else if (*str == 'c')
 				stack->opt |= OPT_C;
-			else if (ft_strchr(str, 'f'))
+			else if (*str == 'f')
 				stack->opt |= OPT_F;
 			str++;
 		}

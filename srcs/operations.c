@@ -72,7 +72,7 @@ void	push(t_linklist *src, t_linklist *dst, t_stack *stack)
 {
 	t_node *tmp;
 
-	if (!src)
+	if (!src->head)
 		return ;
 	tmp = src->head;
 	if (src->head->next)
