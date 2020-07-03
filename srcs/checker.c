@@ -49,33 +49,33 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 			return (print_error(stack, ERR));
 		if (stack->opt & OPT_V)
 		{
-			print_stack(src->head, dst->head, opr, stack->deb_mode);
-			system("sleep 0.05");
+			print_stack(src->head, dst->head, opr, stack);
+			system("sleep 0.1");
+			system("clear");
 		}
 		do_operation(src, dst, stack, opr);
 		free(opr);
 	}
 	if (stack->opt & OPT_V)
-		print_stack(src->head, dst->head, NULL, stack->deb_mode);
+		print_stack(src->head, dst->head, NULL, stack);
 	return (1);
 }
 
 int			main(int ac, char **av)
 {
 	t_stack	stack;
-	int		ret;
 
 	stack.prg = *av;
 	stack.print = 0;
+	stack.count = 0;
 	stack.fd = 0;
 	if (ac < 2)
 		return (0);
 	av += 1;
-	if ((ret = init_stack(&stack, av, ac)))
+	if (init_stack(&stack, av, ac))
 		return (print_error(&stack, ERR));
 	stack.deb_mode = debugging_mode(&stack);
-	ret = get_operations(stack.stack[0], stack.stack[1], &stack);
-	if (ret)
+	if (get_operations(stack.stack[A], stack.stack[B], &stack))
 		ft_printf("%s\n", (issort(stack.stack[0]) && \
 				!stack.stack[1]->head) ? OK : KO);
 	free_stack(&stack);

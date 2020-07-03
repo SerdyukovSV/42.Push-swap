@@ -12,52 +12,56 @@
 
 #include "../includes/push_swap.h"
 
-void		merger_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
+void		merger_stack(t_stack *stack, int med)
 {
-	int med;
+	int sub;
 	int rot;
 
 	rot = 0;
-	med = get_median(stack, STK_B, stack->num_b);
-	stack->push[STK_A][stack->num_a] ? stack->num_a++ : 0;
-	while (is_substack(stack, med, STK_B))
+	sub = is_substack(stack, med, B);
+	stack->push[A][stack->num_a] ? stack->num_a++ : 0;
+	while (sub)
 	{
-		if (dst->head->data >= med)
+		if (stack->stack[B]->head->data >= med)
 		{
-			push(dst, src, stack);
-			stack->push[STK_A][stack->num_a]++;
-			stack->push[STK_B][stack->num_b]--;
+			push(stack->stack[B], stack->stack[A], stack);
+			stack->push[A][stack->num_a]++;
+			stack->push[B][stack->num_b]--;
+			sub--;
+			if (stack->push[A][stack->num_a] <= 3)
+				mini_sort(stack->stack[A], stack);
 		}
 		else if (++rot)
-			rotate(dst, stack);
+			rotate(stack->stack[B], stack);
 	}
 	while (stack->num_b > 0 && rot--)
-		revrotate(dst, stack);
-	!stack->push[STK_B][stack->num_b] ? stack->num_b-- : 0;
-	sort_stack(stack, STK_A);
+		revrotate(stack->stack[B], stack);
+	!stack->push[B][stack->num_b] ? stack->num_b-- : 0;
+	sort_stack(stack);
 }
 
-void		split_stack(t_linklist *src, t_linklist *dst, t_stack *stack)
+void		split_stack(t_stack *stack, int med)
 {
-	int med;
+	int sub;
 	int rot;
 
 	rot = 0;
-	med = get_median(stack, STK_A, stack->num_a);
-	stack->push[STK_B][stack->num_b] ? stack->num_b++ : 0;
-	while (is_substack(stack, med, STK_A) && !issort(src))
+	sub = is_substack(stack, med, A);
+	stack->push[B][stack->num_b] ? stack->num_b++ : 0;
+	while (sub && !issort(stack->stack[A]))
 	{
-		if (src->head->data <= med)
+		if (stack->stack[A]->head->data <= med)
 		{
-			push(src, dst, stack);
-			stack->push[STK_A][stack->num_a]--;
-			stack->push[STK_B][stack->num_b]++;
+			push(stack->stack[A], stack->stack[B], stack);
+			stack->push[A][stack->num_a]--;
+			stack->push[B][stack->num_b]++;
+			sub--;
 		}
 		else if (++rot)
-			rotate(src, stack);
+			rotate(stack->stack[A], stack);
 	}
 	while (stack->num_a > 0 && rot--)
-		revrotate(src, stack);
-	!stack->push[STK_A][stack->num_a] ? stack->num_a-- : 0;
-	sort_stack(stack, STK_A);
+		revrotate(stack->stack[A], stack);
+	!stack->push[A][stack->num_a] ? stack->num_a-- : 0;
+	sort_stack(stack);
 }

@@ -74,25 +74,27 @@ int		get_median(t_stack *stack, int s, int num)
 int		is_substack(t_stack *stack, int med, int s)
 {
 	t_node	*tmp;
+	int		ret;
 	int		i;
 
+	ret = 0;
 	i = -1;
 	tmp = stack->stack[s]->head;
-	if (s == STK_A)
+	if (s == A)
 		while (++i < stack->push[s][stack->num_a])
 		{
 			if (tmp->data <= med)
-				return (1);
+				ret++;
 			tmp = tmp->next;
 		}
 	else
 		while (++i < stack->push[s][stack->num_b])
 		{
 			if (tmp->data >= med)
-				return (1);
+				ret++;
 			tmp = tmp->next;
 		}
-	return (0);
+	return (ret);
 }
 
 int		issort(t_linklist *stack)

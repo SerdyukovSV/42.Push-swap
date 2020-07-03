@@ -6,7 +6,7 @@
 /*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 15:26:26 by gartanis          #+#    #+#             */
-/*   Updated: 2020/06/23 15:44:16 by gartanis         ###   ########.fr       */
+/*   Updated: 2020/07/03 17:06:54 by gartanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "../libft/includes/libft.h"
-// # include <stdio.h>
 
 # define OUTPUT_PS		"OPERATIONS.txt"
 
@@ -38,8 +37,8 @@
 # define OPT_C			(1 << 1)
 # define OPT_F			(1 << 2)
 
-# define STK_A			(0)
-# define STK_B			(1)
+# define A				(0)
+# define B				(1)
 
 typedef struct		s_node
 {
@@ -67,6 +66,7 @@ typedef struct		s_stack
 	int				push[2][4096];
 	int				num_a;
 	int				num_b;
+	int				count;
 	t_linklist		*stack[2];
 }					t_stack;
 
@@ -91,20 +91,18 @@ int					print_error(t_stack *stack, int errcode);
 void				print_operation(t_stack *stack, const char *str, \
 									const char let);
 int					debugging_mode(t_stack *stack);
-void				print_stack(t_node *src, t_node *dst, char *opt, int dmode);
+void				print_stack(t_node *src, t_node *dst, char *opt, \
+								t_stack *st);
 
 /*
 **	Sorting functions
 */
 
-void				sort_stack(t_stack *stack, int ind);
+void				sort_stack(t_stack *stack);
 void				mini_sort(t_linklist *lst, t_stack *stack);
-void				small_sort(t_linklist *list, t_stack *stack);
-void				quick_sort(t_linklist *src, t_linklist *dst, \
-								t_stack *stack);
-void				merger_stack(t_linklist *src, t_linklist *dst, \
-								t_stack *stack);
-void				split_stack(t_linklist *src, t_linklist *dst, t_stack *stack);
+void				quick_sort(t_stack *stack);
+void				merger_stack(t_stack *stack, int med);
+void				split_stack(t_stack *stack, int med);
 
 /*
 **	Execution of instructions

@@ -18,8 +18,8 @@ void	doub_opt(t_stack *stack, char *op, void (*f)(t_linklist *, t_stack *))
 
 	i = stack->print;
 	stack->print = 0;
-	f(stack->stack[STK_A], stack);
-	f(stack->stack[STK_B], stack);
+	f(stack->stack[A], stack);
+	f(stack->stack[B], stack);
 	stack->print = i;
 	print_operation(stack, op, 0);
 }

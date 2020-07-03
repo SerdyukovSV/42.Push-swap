@@ -27,7 +27,7 @@ int		main(int ac, char *av[])
 		return (print_error(&stack, ret));
 	if (stack.opt & OPT_F)
 		stack.fd = open(OUTPUT_PS, O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	sort_stack(&stack, STK_A);
+	sort_stack(&stack);
 	free_stack(&stack);
 	return (ret);
 }

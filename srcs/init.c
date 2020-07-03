@@ -72,9 +72,9 @@ static void			creat_stack(t_stack *stack, char **str)
 	}
 	stack->num_a = 0;
 	stack->num_b = 0;
-	ft_bzero(stack->push[STK_A], 64);
-	ft_bzero(stack->push[STK_B], 64);
-	stack->push[STK_A][0] = stack->stack[STK_A]->size;
+	ft_bzero(stack->push[A], 64);
+	ft_bzero(stack->push[B], 64);
+	stack->push[A][0] = stack->stack[A]->size;
 }
 
 int					init_stack(t_stack *stack, char *av[], int ac)
