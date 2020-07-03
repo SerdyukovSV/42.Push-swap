@@ -66,8 +66,6 @@ int		get_median(t_stack *stack, int s, int num)
 		(min > lst->data) ? min = lst->data : 0;
 		lst = lst->next;
 	}
-	if (max == min)
-		return (max);
 	return ((max + min) / 2);
 }
 
