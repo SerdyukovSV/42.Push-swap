@@ -72,7 +72,7 @@ int			main(int ac, char **av)
 	if (ac < 2)
 		return (0);
 	av += 1;
-	if (init_stack(&stack, av, ac))
+	if (init_stack(&stack, av))
 		return (print_error(&stack, ERR));
 	stack.deb_mode = debugging_mode(&stack);
 	if (get_operations(stack.stack[A], stack.stack[B], &stack))

@@ -23,7 +23,7 @@ int		main(int ac, char *av[])
 	if (ac < 2)
 		return (print_error(&stack, NOARG));
 	av += 1;
-	if ((ret = init_stack(&stack, av, ac)))
+	if ((ret = init_stack(&stack, av)))
 		return (print_error(&stack, ret));
 	if (stack.opt & OPT_F)
 		stack.fd = open(OUTPUT_PS, O_WRONLY | O_CREAT | O_TRUNC, 0664);

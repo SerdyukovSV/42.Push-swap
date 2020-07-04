@@ -74,11 +74,12 @@ typedef struct		s_stack
 **	Initialization functions
 */
 
-int					init_stack(t_stack *stack, char *av[], int ac);
-char				**get_arg(t_stack *stack, int ac, char *av[]);
+int					init_stack(t_stack *stack, char *av[]);
+char				**get_arg(t_stack *stack, char *av[]);
 t_linklist			*creat_linkedlist(char stack);
 int					check_stack(char **str);
 void				free_stack(t_stack *stack);
+void				free_str(char **str);
 
 /*
 **	Supporting functions

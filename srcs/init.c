@@ -77,22 +77,18 @@ static void			creat_stack(t_stack *stack, char **str)
 	stack->push[A][0] = stack->stack[A]->size;
 }
 
-int					init_stack(t_stack *stack, char *av[], int ac)
+int					init_stack(t_stack *stack, char *av[])
 {
 	char	**str;
 	int		ret;
-	int		i;
 
 	stack->opt = 0;
-	str = get_arg(stack, ac, av);
+	str = get_arg(stack, av);
 	if (!str[0])
 		return (NOARG);
 	if ((ret = check_stack(str)))
 		return (ret);
 	creat_stack(stack, str);
-	i = -1;
-	while (str[++i])
-		free(str[i]);
-	free(str);
+	free_str(str);
 	return (ret);
 }
