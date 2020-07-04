@@ -97,12 +97,14 @@ int		is_substack(t_stack *stack, int med, int s)
 
 int		issort(t_linklist *stack)
 {
-	t_node *tmp;
+	t_node	*tmp;
 
 	tmp = stack->head;
 	if (stack->letter == 'a')
+	{
 		while (tmp->next && tmp->data < tmp->next->data)
 			tmp = tmp->next;
+	}
 	else
 		while (tmp->next && tmp->data > tmp->next->data)
 			tmp = tmp->next;

@@ -40,6 +40,8 @@
 # define A				(0)
 # define B				(1)
 
+# define SIZE			(50000)
+
 typedef struct		s_node
 {
 	struct s_node	*next;
@@ -63,7 +65,7 @@ typedef struct		s_stack
 	int				fd;
 	int				print;
 	int				deb_mode;
-	int				push[2][4096];
+	int				push[2][SIZE];
 	int				num_a;
 	int				num_b;
 	int				count;

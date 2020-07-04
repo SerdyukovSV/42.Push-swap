@@ -50,7 +50,7 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 		if (stack->opt & OPT_V)
 		{
 			print_stack(src->head, dst->head, opr, stack);
-			system("sleep 0.1");
+			system("sleep 0.05");
 			system("clear");
 		}
 		do_operation(src, dst, stack, opr);
@@ -76,7 +76,7 @@ int			main(int ac, char **av)
 		return (print_error(&stack, ERR));
 	stack.deb_mode = debugging_mode(&stack);
 	if (get_operations(stack.stack[A], stack.stack[B], &stack))
-		ft_printf("%s\n", (issort(stack.stack[0]) && \
+		ft_printf("%s\n", (issort(stack.stack[A]) && \
 				!stack.stack[1]->head) ? OK : KO);
 	free_stack(&stack);
 	return (0);

@@ -14,21 +14,10 @@
 
 void				free_stack(t_stack *stack)
 {
-	t_linklist	*tmp;
-	int			i;
-
-	i = 0;
-	while (i < 2)
-	{
-		tmp = stack->stack[i];
-		while (tmp->head)
-		{
-			free(tmp->head);
-			tmp->head = tmp->head->next;
-		}
-		free(tmp);
-		i++;
-	}
+	free(stack->stack[A]->head);
+	free(stack->stack[B]->head);
+	free(stack->stack[A]);
+	free(stack->stack[B]);
 }
 
 static void			ft_push(t_linklist *list, int data)
@@ -72,8 +61,8 @@ static void			creat_stack(t_stack *stack, char **str)
 	}
 	stack->num_a = 0;
 	stack->num_b = 0;
-	ft_bzero(stack->push[A], 64);
-	ft_bzero(stack->push[B], 64);
+	ft_bzero(stack->push[A], SIZE);
+	ft_bzero(stack->push[B], SIZE);
 	stack->push[A][0] = stack->stack[A]->size;
 }
 
