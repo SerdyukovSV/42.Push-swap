@@ -14,8 +14,21 @@
 
 void				free_stack(t_stack *stack)
 {
-	free(stack->stack[A]->head);
-	free(stack->stack[B]->head);
+	t_node	*tmp;
+	int		i;
+
+	i = 0;
+	while (i < 2)
+	{
+		tmp = stack->stack[i]->head;
+		while (tmp)
+		{
+			stack->stack[i]->head = stack->stack[i]->head->next;
+			free(tmp);
+			tmp = stack->stack[i]->head;
+		}
+		i++;
+	}
 	free(stack->stack[A]);
 	free(stack->stack[B]);
 }
