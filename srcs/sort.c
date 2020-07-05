@@ -12,7 +12,20 @@
 
 #include "../includes/push_swap.h"
 
-void	mini_sort(t_linklist *lst, t_stack *stack)
+static void	tiny_sort(t_linklist *lst, t_stack *stack)
+{
+	while (!issort(lst))
+	{
+		if (lst->head->data > lst->head->next->data)
+			swap(lst, stack);
+		else if (lst->head->next->data > lst->tail->data)
+			revrotate(lst, stack);
+		else
+			rotate(lst, stack);
+	}
+}
+
+void		mini_sort(t_linklist *lst, t_stack *stack)
 {
 	t_linklist	*dst;
 	int			p;
@@ -39,7 +52,7 @@ void	mini_sort(t_linklist *lst, t_stack *stack)
 	}
 }
 
-void	quick_sort(t_stack *stack)
+void		quick_sort(t_stack *stack)
 {
 	if (!issort(stack->stack[A]))
 		split_stack(stack, get_median(stack, A, stack->num_a));
@@ -50,9 +63,11 @@ void	quick_sort(t_stack *stack)
 	quick_sort(stack);
 }
 
-void	sort_stack(t_stack *stack)
+void		sort_stack(t_stack *stack)
 {
-	if (stack->push[A][stack->num_a] <= 3)
+	if (stack->stack[A]->size <= 3)
+		tiny_sort(stack->stack[A], stack);
+	else if (stack->push[A][stack->num_a] <= 3)
 		mini_sort(stack->stack[A], stack);
 	else
 		quick_sort(stack);
