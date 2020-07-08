@@ -15,4 +15,4 @@ Flags | Description
 
 ### Running
 
-ARG=``ruby -e "puts (1..50).to_a.shuffle.join(' ')"``; ./push_swap $ARG | ./checker -v $ARG
+`ARG=`ruby -e "puts (1..50).to_a.shuffle.join(' ')"`; ./push_swap $ARG | ./checker -v $ARG`
