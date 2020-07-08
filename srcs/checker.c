@@ -6,7 +6,7 @@
 /*   By: gartanis <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/23 15:53:09 by gartanis          #+#    #+#             */
-/*   Updated: 2020/06/27 18:03:38 by gartanis         ###   ########.fr       */
+/*   Updated: 2020/07/08 11:43:02 by gartanis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	get_operations(t_linklist *src, t_linklist *dst, t_stack *stack)
 		if (stack->opt & OPT_V)
 		{
 			print_stack(src->head, dst->head, opr, stack);
-			system("sleep 0.05");
+			system("sleep 0.1");
 			system("clear");
 		}
 		do_operation(src, dst, stack, opr);
