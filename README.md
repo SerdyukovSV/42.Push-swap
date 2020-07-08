@@ -2,7 +2,7 @@
 
 ## Push-swap
 
-<img src="resources/push-swap_final-mark.png"/>
+<img src="resources/push-swap_final-mark.png" width 250/>
 
 ### Options
 
